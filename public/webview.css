@@ -1,0 +1,17 @@
+body, #app, .web {
+    background-color: #f0f2f5 !important;
+}
+
+.landing-wrapper::before {
+    background-color: #008266 !important;
+}
+
+.zaKsw::after, ._11TMV, ._30yMe, .landing-headerTitle, ._3-soo {
+    display: none !important;
+}
+
+._1XkO3 {
+    top: 0 !important;
+    height: calc(100% - 30px) !important;
+    width: 100% !important;
+}

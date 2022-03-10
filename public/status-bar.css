@@ -1,0 +1,26 @@
+.status-bar {
+    display: flex;
+	position: absolute;
+	bottom: 0;
+    height: 20px;
+    width: 100%;
+	font-size: 14px;
+    background-color: #00a884;
+}
+
+.status-bar i {
+    margin-right: 5px;
+}
+
+.status-bar p, .status-bar label {
+    margin-bottom: 1px;
+}
+.status-bar-item {
+    margin: 0 10px;
+    display: inherit;
+    align-items: center;
+}
+
+.author {
+    color: #ffffff99 !important
+}

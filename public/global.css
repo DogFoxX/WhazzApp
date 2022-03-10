@@ -1,0 +1,115 @@
+/* Scrollbar */
+::-webkit-scrollbar-track {
+	background-color: transparent;
+  }
+  
+  ::-webkit-scrollbar {
+	width: 6px!important;
+    height: 6px!important;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+	background-color: #00000033;
+  }
+
+/* Tags & Misc */
+html, body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Segoe UI';
+	background-color: #f8f8f8;
+}
+
+p, label {
+	margin: 0;
+	display: flex;
+	align-items: center;
+	padding: 0;
+	height: 100%;
+	color: white;
+}
+
+a {
+	color: rgb(0,100,200);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:visited {
+	color: rgb(0,80,160);
+}
+
+
+input, button, select, textarea {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: none;
+}
+
+input, textarea {
+	font-size: 13px;
+	color: #54656F;
+	background-color: transparent;
+}
+
+input:disabled {
+	color: #ccc;
+}
+
+select, button, p, label, div, i {
+	user-select: none;
+}
+
+i, strong, span, p, label {
+	pointer-events: none;
+}
+
+button {
+	color: #54656F;
+	background-color: transparent;
+	transition: 0.1s ease-in-out;
+	cursor: pointer;
+}
+
+button:disabled {
+	color: #999;
+}
+
+svg {
+	user-select: none;
+	pointer-events: none;
+}
+
+.fa-solid,
+.fa-light,
+.fa-regular,
+.fa-thin,
+.fa-brands {
+	color: white !important;
+}
+
+.left-align {
+	display: inherit;
+	align-items: center;
+	position: absolute;
+	left: 0;
+	height: 100%;
+}
+
+.right-align {
+	display: inherit;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	height: 100%;
+}

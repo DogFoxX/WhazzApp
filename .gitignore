@@ -1,0 +1,8 @@
+node_modules
+dist
+electron-builder.yml
+README.md
+LICENSE
+package-lock.json
+public/build
+public/assets
