@@ -32,13 +32,9 @@
     - See more at the [Quick Replies](#quick-replies) Section
 
 ### Screenshots :camera:
-<div>
-    <img src="https://github.com/DogFoxX/WhazzApp/blob/master/screenshots/whazzapp_screenshot1.png?raw=true" width="45%">
-    <img src="https://github.com/DogFoxX/WhazzApp/blob/master/screenshots/whazzapp_screenshot2.png?raw=true" width="45%">
-    <img src="https://github.com/DogFoxX/WhazzApp/blob/master/screenshots/whazzapp_screenshot3.png?raw=true" width="45%">
-    <img src="https://github.com/DogFoxX/WhazzApp/blob/master/screenshots/whazzapp_screenshot4.png?raw=true" width="45%">
-    <img src="https://github.com/DogFoxX/WhazzApp/blob/master/screenshots/whazzapp_screenshot5.png?raw=true" width="45%">
-    <img src="https://github.com/DogFoxX/WhazzApp/blob/master/screenshots/whazzapp_screenshot6.png?raw=true" width="45%">
+<div align="center">
+    <img src="https://github.com/DogFoxX/assets/blob/master/whazzapp/screenshot_1.png?raw=true" width="45%">
+    <img src="https://github.com/DogFoxX/assets/blob/master/whazzapp/screenshot_2.png?raw=true" width="45%">
 </div>
 
 # Features
