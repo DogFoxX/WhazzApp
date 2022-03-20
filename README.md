@@ -35,6 +35,7 @@
 <div align="center">
     <img src="https://github.com/DogFoxX/assets/blob/master/whazzapp/screenshot_1.png?raw=true" width="45%">
     <img src="https://github.com/DogFoxX/assets/blob/master/whazzapp/screenshot_2.png?raw=true" width="45%">
+    <img src="https://github.com/DogFoxX/assets/blob/master/whazzapp/screenshot_5.png?raw=true" width="45%">
 </div>
 
 # Features
