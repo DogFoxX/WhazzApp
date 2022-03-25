@@ -1,0 +1,96 @@
+@media screen and (min-width: 1025px) and (max-width: 1300px) {
+    .window {
+        width: 35% !important;
+    }
+}
+
+@media screen and (min-width: 901px) and (max-width: 1024px) {
+    .window {
+        width: 35% !important;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .window {
+        width: 40% !important;
+    }
+}
+
+.window-bg {
+    position: fixed;
+    top: 80px;
+    height: calc(100% - 103px);
+    width: 100%;
+    background-color: var(--modal-backdrop);
+    z-index: 3;
+}
+
+.window {
+	position: fixed;
+	top: 80px;
+	height: calc(100% - 103px);
+	width: 30%;
+    background-color: var(--modal-bg-color);
+    border-right: 1px solid var(--modal-border-color);
+    z-index: 3;
+}
+
+.window-header {
+    display: flex;
+    align-items: end;
+	padding-left: 23px;
+	padding-right: 20px;
+    height: 108px;
+    width: 100%;
+    background-color: var(--modal-header-bg-color);
+}
+
+.window-button-container {
+	display: inherit;
+	align-items: center;
+	height: 59px;
+	width: 53px;
+}
+
+.window-title-container {
+	display: inherit;
+	align-items: center;
+	padding-bottom: 1px;
+	height: 59px;
+}
+
+.window-title {
+    font-size: 19px;
+	font-weight: 500;
+    color: var(--primary-font-color);
+}
+
+.window-content {
+    height: calc(100% - 108px);
+    overflow: hidden;
+}
+
+.window-message {
+    opacity: 0;
+    position: absolute;
+    left: 15px;
+    color: #e83a3a;
+    transition: 0.5s ease-in-out;
+}
+
+.window-close {
+    height: 24px;
+    width: 24px;
+    font-size: 19px;
+}
+
+.window-save-btn {
+    position: absolute;
+    right: 15px;
+    height: 30px;
+    padding: 0 10px;
+    width: 100px;
+    background-color: var(--form-bg-color);
+    border-radius: 15px;
+    font-size: 16px;
+}

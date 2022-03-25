@@ -1,0 +1,25 @@
+.status-bar {
+    display: flex;
+	position: absolute;
+	bottom: 0;
+    height: 22px;
+    width: 100%;
+	font-size: 14px;
+    background-color: var(--primary-bg-color);
+    border-top: 1px solid var(--modal-border-color);
+}
+
+.status-bar i {
+    margin-right: 5px;
+}
+
+.status-bar-item {
+    margin: 0 10px;
+    display: inherit;
+    align-items: center;
+    height: 100%;
+}
+
+.author {
+    color: var(--author-color) !important;
+}

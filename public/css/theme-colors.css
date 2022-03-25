@@ -1,0 +1,71 @@
+/*Default Theme*/
+[data-theme="light"] {
+    /* Global */
+    --body-bg-color: #F8F8F8;
+    --body-bg-image: url('/assets/whazzapp_icon.svg');
+	--button-font-color: #54656F;
+	--primary-font-color: white;
+	--secondary-font-color: #54656F;
+	--input-font-color: #3B4A54;
+	--input-placeholder-font-color: #667781;
+	--fa-color: white;
+	--scrollbar-bg-color: #CED0D1;
+    --primary-bg-color: #00A884;
+	--primary-btn-hover-bg-color: #009477;
+    --border-color: #D0D5D9;
+    /* Header */
+    --form-bg-color: white;
+	--search-btn-color: #00A844;
+    --search-btn-disabled-color: #adadad;
+    /* Status Bar */
+    --author-color: #FFFFFF99;
+    /* modal */
+    --modal-backdrop: #FFFFFFD9;
+    --modal-bg-color: white;
+    --modal-header-bg-color: #008069;
+    --modal-form-bg-color: #F0F2F5;
+    --modal-border-color: #E9EDEF;
+    --modal-lines-color: #E9EDEF;
+    --button-hover-bg-color: #F0F2F5;
+    /* Emoji Picker */
+    --emoji-form-bg-color: white;
+    --bezier-bg-color: #008069;
+    --context-menu-bg-color: #F0F2F5;
+    --context-menu-border-color: #3B4A5433;
+}
+
+/*Dark Theme */
+[data-theme="dark"] {
+    /* Global */
+    --body-bg-color: #222E35;
+    --body-bg-image: url('/assets/whazzapp_icon.svg');
+	--button-font-color: #E9EDEF;
+	--primary-font-color: #E9EDEF;
+	--secondary-font-color: #8696A0;
+	--input-font-color: #D1D7DB;
+	--input-placeholder-font-color: #8696A0;
+	--fa-color: #E9EDEF;
+	--scrollbar-bg-color: #374045;
+    --primary-bg-color: #111B21;
+	--primary-btn-hover-bg-color: #202C33;
+    --border-color: #313D45;
+    /* Header */
+    --form-bg-color: #202C33;
+    --search-btn-color: #00A844;
+    --search-btn-disabled-color: #54656F;
+    /* Status Bar */
+    --author-color: #E9EDEF99;
+    /* Modal */
+    --modal-backdrop: #0B141AD9;
+    --modal-bg-color: #111B21;
+    --modal-header-bg-color: #202C33;
+    --modal-form-bg-color: #202C33;
+    --modal-border-color: #313D45;
+    --modal-lines-color: #202C33;
+    --button-hover-bg-color: #202C33;
+    /* Emoji Picker */
+    --emoji-form-bg-color: #2A3942;
+    --bezier-bg-color: #00a884;
+    --context-menu-bg-color: #233138;
+    --context-menu-border-color: #D1D7DB33;
+}

@@ -1,0 +1,147 @@
+.modal-header-footer {
+    padding: 7.5px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    background-color: var(--modal-form-bg-color);
+    z-index: 2;
+}
+
+.modal-form-input {
+    padding: 0 10px;
+    height: 35px;
+    width: calc(100% - 20px);
+}
+
+.placeholder {
+	position: absolute;
+	top: 7.5px;
+    left: 10px;
+	font-size: 14px;
+	color: var(--input-placeholder-font-color);
+	user-select: none;
+	pointer-events: none;
+}
+
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    border-top: 1px solid var(--modal-lines-color);
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.list-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20px;
+    height: 50px;
+    width: 100%;
+    text-align: left;
+}
+
+.list-btn span {
+    font-size: 15px;
+    color: var(--secondary-font-color);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.list-btn .flag {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    min-width: 62px !important;
+    font-size: 20px;
+}
+
+.list-btn .details {
+    display: flex;
+    align-items: center;
+    height: 49px;
+    width: 100%;
+    overflow: hidden;
+    white-space: break-spaces !important;
+    text-overflow: ellipsis;
+}
+
+.list-btn:not(:first-of-type) .details {
+    border-top: 1px solid var(--modal-lines-color);
+}
+
+.list-btn:hover {
+    background-color: var(--button-hover-bg-color);
+}
+
+.modal-text-editing {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-height: 50px;
+    max-height: calc(100% - 316px);
+    width: calc(100% - 20px);
+    border-top: 1px solid var(--border-color);
+}
+
+.edit-btn {
+    margin: 0 5px;
+    height: 40px;
+    min-width: 30px;
+    font-size: 18px;
+    color: var(--secondary-font-color) !important;
+}
+
+.edit-btn:last-of-type {
+    position: absolute;
+    right: 0;
+    font-size: 20px;
+}
+
+.modal-btn {
+    height: 35px;
+    width: 100%;
+}
+
+.modal-message {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    height: 26px;
+}
+
+.modal-message p {
+    font-size: 15px;
+    color: #eb4c4c;
+}
+
+@keyframes myAnim {
+    0%,
+    50%,
+    100% {
+      opacity: 1;
+    }
+  
+    25%,
+    75% {
+      opacity: 0;
+    }
+  }
