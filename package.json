@@ -1,7 +1,7 @@
 {
 	"name": "whazzapp",
 	"productName": "WhazzApp",
-	"version": "0.9.0",
+	"version": "0.9.1",
 	"description": "An alternative to WhatsApp Web Desktop, with extra added functionality",
 	"repository": {
 		"type": "git",
