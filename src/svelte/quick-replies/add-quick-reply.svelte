@@ -129,16 +129,6 @@
 
 	const emojiRightClick = (e, args) => {
 		e.preventDefault()
-
-		if (contextMenuOpen) {
-			contextMenuOpen = false
-			setTimeout(() =>{
-				contextMenuOpen= true
-			}, 100)
-		}
-		else {
-			contextMenuOpen = true
-		}
 		
 		let rect = e.target.getBoundingClientRect()
 
@@ -152,7 +142,16 @@
         .values(allEmojis)
         .flat()
         .filter(({ alt }) => alt === args.emoji)
-		
+
+		if (contextMenuOpen) {
+			contextMenuOpen = false
+			setTimeout(() =>{
+				contextMenuOpen= true
+			}, 100)
+		}
+		else {
+			contextMenuOpen = true
+		}		
 	}
 
 	const windowClick = (e) => {
@@ -208,7 +207,7 @@
 		</div>
 	</div>
 	{#if emoji}
-		<div in:fly={{y: -50, duration: 250, opacity: 1}} out:fly={{y: -50, duration: 320, opacity: 1, easing: expoIn}} class="emoji-picker">
+		<div in:fly={{y: -50, duration: 250}} out:fly={{y: -50, duration: 320, easing: expoIn}} class="emoji-picker">
 				<div class="emoji-categories">
 					<div class="category-bezier"></div>
 				<button on:click={scrollToCategory} class="emoji-category" title="Smileys & People" name="smileys-people" pos="0%">

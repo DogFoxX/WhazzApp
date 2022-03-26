@@ -59,7 +59,7 @@
 
 .list-btn span {
     font-size: 15px;
-    color: var(--secondary-font-color);
+    color: var(--modal-button-font-color);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -87,8 +87,17 @@
     border-top: 1px solid var(--modal-lines-color);
 }
 
-.list-btn:hover {
-    background-color: var(--button-hover-bg-color);
+.list-btn:not(:disabled):hover {
+    background-color: var(--modal-button-hover-bg-color);
+}
+
+.list-btn:disabled {
+    cursor: default;
+    background-color: var(--modal-button-disabled-bg-color);
+}
+
+.list-btn:disabled .details, .list-btn:disabled + .list-btn .details {
+    border-color: transparent !important;
 }
 
 .modal-text-editing {

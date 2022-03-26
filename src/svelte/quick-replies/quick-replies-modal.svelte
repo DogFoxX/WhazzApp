@@ -1,10 +1,10 @@
 <script>
     // Imports
     import { getContext } from 'svelte'
-    export let quickReplies, listButtonClick
+    import AddQuickReply from './add-quick-reply.svelte'
 
     // Exports
-    import AddQuickReply from './add-quick-reply.svelte'
+    export let quickReplies, listButtonClick
 
     const { open } = getContext('modal')
 

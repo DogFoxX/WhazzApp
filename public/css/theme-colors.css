@@ -25,8 +25,10 @@
     --modal-header-bg-color: #008069;
     --modal-form-bg-color: #F0F2F5;
     --modal-border-color: #E9EDEF;
-    --modal-lines-color: #E9EDEF;
-    --button-hover-bg-color: #F0F2F5;
+    --modal-lines-color: #E9EDEF;    
+    --modal-button-font-color: #54656F;
+    --modal-button-hover-bg-color: #F5F6F6;
+    --modal-button-disabled-bg-color: #F0F2F5;
     /* Emoji Picker */
     --emoji-form-bg-color: white;
     --bezier-bg-color: #008069;
@@ -62,7 +64,9 @@
     --modal-form-bg-color: #202C33;
     --modal-border-color: #313D45;
     --modal-lines-color: #202C33;
-    --button-hover-bg-color: #202C33;
+    --modal-button-font-color: #E9EDEF;
+    --modal-button-hover-bg-color: #202C33;
+    --modal-button-disabled-bg-color: #2A3942;
     /* Emoji Picker */
     --emoji-form-bg-color: #2A3942;
     --bezier-bg-color: #00a884;
