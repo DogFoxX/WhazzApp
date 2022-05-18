@@ -16,7 +16,7 @@
     <br>
     <img src="https://github.com/DogFoxX/assets/blob/master/whazzapp/whazzapp.png?raw=true" alt="WhazzApp Banner" width="100%" />
     <br>
-    <h1>VERSION <ins><a href="https://github.com/DogFoxX/WhazzApp/releases/tag/v0.9.1">0.9.1 PRE-RELEASE IS HERE</a></ins>!!!</h1>
+    <h1>VERSION <ins><a href="https://github.com/DogFoxX/WhazzApp/releases/tag/v0.9.2">0.9.2 PRE-RELEASE IS HERE</a></ins>!!!</h1>
 </div>
 
 ### An ElectronJS/Svelte based WhatsApp Desktop alternative, with extra functionality
