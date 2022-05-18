@@ -1,0 +1,4 @@
+node_modules
+dist
+electron-builder.yml
+public/assets

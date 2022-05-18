@@ -1,0 +1,31 @@
+{
+    "appId": "WhazzApp",
+    "icon": "/resources/icon.ico",
+    "extraFiles": [
+        "resources/**/**"
+    ],
+    "files": [
+        "public/**/*",
+        "main.js",
+        "preload.js"
+    ],
+    "win": {
+        "target": "nsis"
+    },
+    "nsis": {
+        "artifactName": "whazzapp_setup.${ext}",
+        "createStartMenuShortcut": "true",
+        "deleteAppDataOnUninstall": "true",
+        "uninstallDisplayName": "WhazzApp"
+    },
+    "protocols": {
+      "name": "whazzapp",
+      "schemes": [
+        "whatsapp"
+      ]
+    },
+    "publish": {
+        "provider": "github",
+        "token": "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"
+    }
+}
