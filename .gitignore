@@ -1,0 +1,10 @@
+node_modules
+dist
+
+electron-builder.json
+dev-app-update.yml
+package-lock.json
+public/build
+public/assets/fontawesome
+public/assets/emojis
+resources/emojis.json
