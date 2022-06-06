@@ -27,12 +27,21 @@ div {
 	user-select: none;
 }
 
-p, span, label, h1, h2, h3 {
+p, span, h1, h2, h3 {
 	margin: 0;
 	padding: 0;
 	border: none;
 	outline: none;
 	pointer-events: none;
+	user-select: none;
+	font-family: inherit;
+}
+
+label {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
 	user-select: none;
 	font-family: inherit;
 }
@@ -58,6 +67,27 @@ input:disabled {
 	color: #ccc;
 }
 
+.checkbox {
+	margin-top: 5px;
+	display: flex;
+	align-items: center;
+}
+
+.checkbox label {
+	line-height: 22px;
+}
+
+input[type=checkbox] {
+	margin-right: 10px;
+	height: 18px;
+	width: 18px;
+	accent-color: #00A884;
+}
+
+input[type=checkbox]:focus-visible {
+	outline: 2px dotted #53BDEB;
+}
+
 button {
 	background-color: transparent;
 	outline: none;
@@ -66,11 +96,19 @@ button {
 	font-family: inherit;
 }
 
-button:disabled {
+.reply-menu-btn[aria-disabled="true"] {
 	pointer-events: none;
 }
 
-button:disabled span {
+.reply-menu-btn[aria-disabled=true] span {
+	color: var(--menu-input-placeholder-color);
+}
+
+button[aria-disabled=true] {
+	pointer-events: none;
+}
+
+button[aria-disabled=true] span {
 	color: #00A884;
 }
 

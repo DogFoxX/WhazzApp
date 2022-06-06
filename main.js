@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const { autoUpdater } = require('electron-updater');
 require("@electron/remote/main").initialize();
 const windowStateKeeper = require('electron-window-state');
 const serve = require('electron-serve');
@@ -9,11 +10,28 @@ const Store = require('electron-store');
 const fs = require('fs');
 const path = require('path');
 const insertCSS = fs.readFileSync(path.join(__dirname, '/public/css/webview.css'), 'utf-8');
+const { registerGlobal, unregisterGlobal } = require("electron-shortcuts");
 
 app.setAsDefaultProtocolClient('whatsapp');
 app.setAppUserModelId(app.name);
 
 let mainWindow;
+
+let hotkeyStore = new Store({
+	name: 'hotkeys',
+	fileExtension: '',
+	watch: true,
+	defaults: {
+		shortcuts: [
+			'F2',
+			'F5'
+		],
+		hotkeys: []
+	}
+});
+
+let shortcuts = hotkeyStore.get('shortcuts');
+let hotkeys = hotkeyStore.get('hotkeys');
 
 new Store();
 
@@ -60,7 +78,7 @@ function createWindow() {
 		mainWindow.loadURL('http://localhost:5000/');
 	}
 	else {
-		loadURL(mainWindow)
+		loadURL(mainWindow);
 	};
 
 	process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
@@ -74,6 +92,7 @@ function createWindow() {
 	});
 };
 
+// Create Single Instance App
 if (!gotTheLock) {
 	app.quit();
 }
@@ -91,10 +110,33 @@ else {
 	
 	app.on('ready', () => {
 		createWindow();
-		// Include any other code here. Good place to check for updates when the app starts
+
+		if (isDev()) {
+			autoUpdater.checkForUpdates();
+		};
+
+		// Insert Webview Preload
 		mainWindow.webContents.on('will-attach-webview', (e, webPreferences) => {
-			webPreferences.preloadURL = path.join(__dirname, '/public/assets/webview-preload.js')
-		})
+			webPreferences.preload = path.join(__dirname, '/public/assets/webview-preload.js');
+		});
+
+		// Register Shortcuts & Hotkeys
+		for (let shortcut of shortcuts) {
+			registerGlobal(shortcut, () => {
+				if (mainWindow.isFocused()) {
+					mainWindow.webContents.send('hotkey', shortcut);
+				};
+			});
+		};
+		if (hotkeys) {
+			for (let hotkey of hotkeys) {
+				registerGlobal(hotkey, () => {
+					if (mainWindow.isFocused()) {
+						mainWindow.webContents.send('hotkey', hotkey);
+					};
+				});
+			};
+		};
 	});
 };
 
@@ -107,10 +149,6 @@ contextMenu({
 // Webview
 ipcMain.on('theme', (e, color) => {
 	mainWindow.webContents.send('theme', color);
-});
-
-ipcMain.on('webview-keydown', (e, key) => {
-	mainWindow.webContents.send('webview-keydown', key);
 });
 
 app.on('web-contents-created', (e, contents) => {
@@ -167,5 +205,24 @@ app.on('activate', function () {
 
 // Get App Details
 ipcMain.handle('get-details', async () => {
-	return {author: 'DogFoxX', appName: app.name, version: app.getVersion()};
+	return { appName: app.name, version: app.getVersion() };
+});
+
+hotkeyStore.onDidChange('hotkeys', (newValue, oldValue) => {
+	hotkeys = newValue;
+	let difference = oldValue.filter(x => !newValue.includes(x))[0];
+
+	if (difference) {
+		unregisterGlobal(difference);
+	}
+
+	if (hotkeys != []) {
+		for (let hotkey of hotkeys) {
+			registerGlobal(hotkey, () =>  {
+				if (mainWindow.isFocused()) {
+					mainWindow.webContents.send('hotkey', hotkey);
+				};
+			});
+		};
+	};
 });

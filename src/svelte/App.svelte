@@ -3,11 +3,12 @@
 	import { onMount } from 'svelte';
 	import { fly, fade } from 'svelte/transition';
     import { expoIn } from 'svelte/easing';
-	import { subMenuContent } from '../stores.js'
+	import { subMenuContent, dialog } from '../stores.js';
 	import MainMenu from '../svelte/menus/main-menu.svelte';
+	import QuickReplies from './menus/sub-menus/quick-replies.svelte';
 
 	// Constants
-	const { ipcRenderer } = require('electron')
+	const { ipcRenderer, clipboard } = require('electron');
 	const mainWindow = require('@electron/remote').getCurrentWindow();
 	const Store = require('electron-store');
 
@@ -15,24 +16,65 @@
 	
 
 	// Variables
-	let accStore = new Store({
-		name: 'accounts',
-		cwd: 'Partitions',
-		fileExtension: '',
-		watch: true,
-		defaults: {
-			'accounts': []
-		}
-	});
+	let accStore = new Store(
+			{
+				name: 'accounts',
+				cwd: 'Partitions',
+				fileExtension: '',
+				watch: true,
+				defaults: {
+					'accounts': []
+				}
+			}
+		),
+		accounts = accStore.get('accounts'),
+		accountName,
+		userName;
+
+	let hotkeyStore = new Store(
+			{
+				name: 'hotkeys',
+				fileExtension: ''
+			}
+		),
+		hotkeys = hotkeyStore.get('hotkeys');
+
+	let replyStore,
+		quickReplies = [];
+
+	const getActiveAccountDir = () => {
+		if (accounts) {
+			return accounts.filter(({active}) => active == true).map(({id}) => id);
+		};
+	};
+
+	const createReplyStore = () => {
+		if (getActiveAccountDir() != '') {
+			replyStore = new Store(
+				{
+					name: 'quick-replies',
+					cwd: `Partitions/${getActiveAccountDir()}`,
+					fileExtension: '',
+					watch: true,
+					defaults: {
+						'quick-replies': []
+					}
+				}
+			);
+			quickReplies = replyStore.get('quick-replies');
+
+			replyStore.onDidAnyChange(() => {
+				quickReplies = replyStore.get('quick-replies');
+				hotkeyStore.set('hotkeys', quickReplies.filter(({hotkey}) => hotkey != '').map(({hotkey}) => hotkey));
+    		});
+
+			hotkeyStore.set('hotkeys', quickReplies.filter(({hotkey}) => hotkey != '').map(({hotkey}) => hotkey));
+		};
+	};
 
 	let isMax = Boolean,
 		menuOpen = Boolean(false),
 		dropdownOpen = Boolean(false);
-
-	let accounts = accStore.get('accounts'),
-		activeAccount = [],
-		accountName,
-		userName;
 
 	let title = mainWindow.getTitle(),
 		menu,
@@ -43,10 +85,13 @@
 
 	onMount(() => {
 		mainWindow.isMaximized() ? isMax = true : isMax = false;
+		
 		getActiveAccountUser((result) => {
             accountName = result.account;
             userName = result.user;
         });
+		
+		createReplyStore();
 	});
 
 	// Get Webview Title and Theme
@@ -64,6 +109,7 @@
 	};
 
 	const windowAction = (e) => {
+		// Close, Minimize, Maximize
 		if (e.target.id == 'close') {
 			mainWindow.close();
 		}
@@ -76,61 +122,54 @@
 		webview.focus();
 	};
 
-	ipcRenderer.on('webview-keydown', (e, key) => {
-		windowKeydown(key);
-	});
-
 	const windowMousedown = (e) => {
-		if (e.target.matches('.user-dropdown-list') || e.target.matches('#dropdown-btn') || e.target.matches('#dropdown-list-btn')) return
-		if (e.target.matches('*')
-		) {
-			dropdownOpen = false
-		}
-	}
+		if (e.target.matches('.user-dropdown-list') || e.target.matches('#dropdown-btn') || e.target.matches('#dropdown-list-btn')) return;
+
+		if (e.target.matches('*')) {
+			dropdownOpen = false;
+		};
+	};
 
 	const windowKeydown = (e) => {
-		// Close, Minimize, Maximize
 		if (e.key === 'Escape') {
 			if (dropdownOpen) {
 				dropdownOpen = false;
 			}
-			else if ($subMenuContent.component) {
+			else if ($subMenuContent.component && !$dialog.component) {
 				subMenuContent.set({component: null, title: null})
 			}
-			else if (menuOpen && !dropdownOpen && !$subMenuContent.component) {
+			else if ($dialog.component) {
+				dialog.set({component: null, title: null})
+			}
+			else if (menuOpen && !dropdownOpen && !$subMenuContent.component && !$dialog.component) {
 				menuOpen = false;
 				menuBtn.classList.remove('active');
-				webview.focus();
+				webview ? webview.focus() : '';
 			}
-		}
-		else if (e.key === 'F2') {
-			openMenu();
-		}
-		else if (e.key === 'F5') {
-			webview.reload();
 		};
-
-		// Menu Focus Trap
-		if (menuOpen && e.key === 'Tab') {
-            const nodes = document.querySelector('.user-dropdown-content') ? document.querySelector('.user-dropdown-content').querySelectorAll('*') : menu.querySelectorAll('*');
-            const tabbable = Array.from(nodes).filter((node) => node.tabIndex >= 0);
-            
-            let index = tabbable.indexOf(document.activeElement);
-            if (index === -1 && e.shiftKey) index = 0;
-            
-            index += tabbable.length + (e.shiftKey ? -1 : 1);
-            index %= tabbable.length;
-            
-            tabbable[index].focus();
-            e.preventDefault();
-        }
 	};
+
+	ipcRenderer.on('hotkey', (e, key) => {
+		switch (key) {
+			case 'F2':
+				openMenu();
+				break;
+			case 'F5':
+				webview.reload();
+				break;
+			default:
+				if (quickReplies != []) {
+					clipboard.writeText(quickReplies.filter(({hotkey}) => hotkey == key)[0].value);
+				};
+				break;
+		}
+	});
 
 	// Menu Functions
 	export const openMenu = () => {
 		menuOpen = !menuOpen;
 		menuOpen ? menuBtn.classList.add('active') : menuBtn.classList.remove('active');
-		menuOpen ? webview.blur() : webview.focus();
+		webview ? menuOpen ? webview.blur() : webview.focus() : '';
 	};
 
 	export const numberSearch = (e, number, code, callback) => {
@@ -152,21 +191,24 @@
 
 	accStore.onDidAnyChange(() => {
         accounts = accStore.get('accounts');
+		
 		getActiveAccountUser((result) => {
             accountName = result.account;
             userName = result.user;
         });
+
+		createReplyStore();
     });
 
 	const getActiveAccountUser = (callback) => {
-        let account;
+        let account = '';
         let user = '';
 
         if (accounts) {
-            activeAccount = accounts
+            let activeAccount = accounts
         	.filter(({active}) => active == true);
 			
-            account = activeAccount.length > 0 ? activeAccount.map(({name}) => name) : 'Login or create an account';
+            account = activeAccount.length > 0 ? activeAccount.map(({name}) => name) : '';
 
             user = activeAccount
             .map(({users}) => users)
@@ -183,7 +225,7 @@
 
 <section id="title-bar">
 	<div class="left-align">
-		<button bind:this={menuBtn} on:click={openMenu} class="title-btn menu-btn" title="Menu (F2)">
+		<button bind:this={menuBtn} on:click={openMenu} class="title-btn menu-btn" title="Menu (F2)" aria-disabled={$dialog.component ? true : false}>
 			<span />
 			<span />
 			<span />
@@ -219,15 +261,16 @@
 {#if menuOpen}
 	<div transition:fade={{duration: 180}} on:mousedown|preventDefault class="menu-backdrop" />
 	<section bind:this={menu} in:fly={{x: -170, duration: 280, opacity: 1}} out:fly={{x: -menu.offsetWidth, duration: 300, opacity: 1, easing: expoIn}} id="menu">
-		<MainMenu {openMenu} bind:dropdownOpen={dropdownOpen} {numberSearch} {accStore} {accounts} {accountName} {userName} />
+		<MainMenu {openMenu} bind:dropdownOpen={dropdownOpen} {numberSearch} {accStore} {accounts} {accountName} {userName} {replyStore} {quickReplies} />
 	</section>
 {/if}
 
-{#if activeAccount.length > 0}
-	{#each activeAccount as account}
-		<webview bind:this={webview} src="https://web.whatsapp.com" partition={`persist:${account.id}`}></webview>
-	{/each}
-{:else}
+{#each accounts as account}
+{#if account.active}
+	<webview bind:this={webview} src="https://web.whatsapp.com" partition={`persist:${account.id}`}></webview>
+{/if}
+{/each}
+{#if !webview}
 	<section class="splash">
 		<svg height="80px" viewBox="0 0 1319.18 1319.18">
 			<path fill="currentColor" d="M81.87 689.48c0,-301.05 244.06,-545.11 545.12,-545.11 301.06,0 545.11,244.06 545.11,545.11 0,301.06 -244.05,545.12 -545.11,545.12 -301.06,0 -545.12,-244.06 -545.12,-545.12zm1172 0c0,-346.21 -280.66,-626.88 -626.88,-626.88 -346.22,0 -626.89,280.67 -626.89,626.88 0,346.22 280.67,626.89 626.89,626.89 346.22,0 626.88,-280.67 626.88,-626.89z"/>

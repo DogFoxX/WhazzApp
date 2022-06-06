@@ -1,27 +1,27 @@
 [class="web"] {
-    --background-color: #F0F2F5;
-    --landing-background-color: #008266
+	--background-color: #F0F2F5;
+	--landing-background-color: #008266
 }
 
 [class="web dark"] {
-    --background-color: #111B21;
-    --landing-background-color: #202C33
+	--background-color: #111B21;
+	--landing-background-color: #202C33
 }
 
 body, #app, .web {
-    background-color: var(--background-color) !important;
+	background-color: var(--background-color) !important;
 }
 
 .landing-wrapper::before {
-    background-color: var(--landing-background-color) !important;
+	background-color: var(--landing-background-color) !important;
 }
 
 .zaKsw::after, ._11TMV, ._30yMe, .landing-headerTitle, ._3-soo {
-    display: none !important;
+	display: none !important;
 }
 
 ._1XkO3 {
-    top: 0 !important;
-    height: 100% !important;
-    width: 100% !important;
+	top: 0 !important;
+	height: 100% !important;
+	width: 100% !important;
 }

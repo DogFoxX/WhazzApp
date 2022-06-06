@@ -1,0 +1,128 @@
+.dialog-bg {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	bottom: 0;
+	z-index: 99999;
+	height: calc(100% - 30px);
+	width: 100%;
+}
+
+.dialog-window {
+	position: relative;
+	padding: 22px 24px 20px;
+	border-radius: 3px;
+	background-color: var(--dialog-bg-color);
+	color: var(--dialog-text-color);
+	box-shadow: 0 17px 50px 0 #0B141A30, 0 12px 15px 0 #0B141A3D;
+}
+
+.dialog-title {
+	margin-bottom: 20px;
+	font-size: 20px;
+	line-height: 25px;
+}
+
+.dialog-content {
+	min-height: 90px;
+	min-width: 352px;
+}
+
+.dialog-content-form:not(:first-child) {
+	margin-top: 20px;
+}
+
+.dialog-actions {
+	display: flex;
+	flex-wrap: wrap-reverse;
+	justify-content: flex-end;
+	position: relative;
+	padding: 50px 5px 0;
+}
+
+.dialog-error {
+	position: absolute;
+	top: 15px;
+	left: 0;
+	color: #F54949;
+}
+
+.dialog-btn {
+	margin-bottom: 5px;
+	padding: 10px 24px;
+	letter-spacing: 1.25px;
+	font-weight: 500;
+	font-size: 14px;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	transition: 0.18s ease-in-out;
+	cursor: pointer;
+}
+
+.dialog-btn:hover {
+	box-shadow: 0px 2px 7px #0B141A17, 0px 1px 2px #0B141A0C;
+}
+
+.dialog-btn[class*="cancel"] {
+	border-color: var(--dialog-btn-border-color);
+	color: var(--dialog-btn-secondary-color);
+}
+
+.dialog-btn[class*="cancel"]:hover {
+	background-color: var(--dialog-btn-secondary-hover-bg-color);
+}
+
+.dialog-btn[class*="cancel"]:focus-visible {
+	background-color: var(--dialog-btn-secondary-hover-bg-color);
+	box-shadow: 0px 2px 7px #0B141A17, 0px 1px 2px #0B141A0C;
+}
+
+.dialog-btn[class*="save"] {
+	margin-left: 4px;
+	background-color: var(--dialog-btn-bg-color);
+	color: var(--dialog-btn-color);
+}
+
+.dialog-btn[class*="save"]:hover {
+	background-color: var(--dialog-btn-hover-bg-color);
+}
+
+.dialog-btn[class*="save"]:focus-visible {
+	background-color: var(--dialog-btn-hover-bg-color);
+	box-shadow: 0px 2px 7px #0B141A17, 0px 1px 2px #0B141A0C;
+}
+
+.dialog-checkbox, .dialog-checkbox-label {
+	cursor: pointer;
+}
+
+.users {
+	overflow-y: auto;
+	max-height: 150px;
+}
+
+.reply-text {
+	height: 180px;
+    width: 450px;
+}
+
+.reply-text-formatting {
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding: 0 12px;
+}
+
+.reply-text-formatting button {
+	height: 40px;
+	width: 40px;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.emoji-btn {
+	position: absolute;
+	right: 7.5px;
+	color: inherit;
+}

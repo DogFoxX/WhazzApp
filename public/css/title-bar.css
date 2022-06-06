@@ -1,75 +1,74 @@
 #title-bar {
-    -webkit-app-region: drag;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    height: 30px;
-    width: 100%;
-    background-color: var(--primary-bg-color);
+	-webkit-app-region: drag;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	height: 30px;
+	width: 100%;
+	background-color: var(--primary-bg-color);
 }
 
 #title-bar * :not(.title) {
-    -webkit-app-region: no-drag;
+	-webkit-app-region: no-drag;
 }
 
 .title {
-    font-size: 0.85rem;
-    color: var(--primary-font-color);
+	font-size: 14px;
+	color: var(--primary-font-color);
 }
 
 .title-btn {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 	justify-content: center;
-    color: var(--primary-font-color);
-    width: 46px;
-    font-size: 1rem;
-    transition: 0.15s ease-in-out;
+	color: var(--primary-font-color);
+	width: 46px;
+	transition: 0.15s ease-in-out;
 }
 
 .title-btn:hover {
-    background-color: var(--title-btn-hover-bg-color);
+	background-color: var(--title-btn-hover-bg-color);
 }
 
 .menu-btn {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .menu-btn span {
-    background-color: var(--primary-font-color);
-    width: 5px;
-    height: 5px;
-    margin: 0 1.5px;
-    border-radius: 50%;
-    display: inline-block;
-    transition: transform 0.25s ease-in-out;
+	background-color: var(--primary-font-color);
+	width: 5px;
+	height: 5px;
+	margin: 0 1.5px;
+	border-radius: 50%;
+	display: inline-block;
+	transition: transform 0.25s ease-in-out;
 }
 
 .menu-btn:hover {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 .menu-btn:hover span:nth-child(1) {
-    transform: translateY(4px) translateX(2px);
+	transform: translateY(4px) translateX(2px);
 }
 
 .menu-btn:hover span:nth-child(2) {
-    transform: translateY(-4px);
+	transform: translateY(-4px);
 }
 
 .menu-btn:hover span:nth-child(3) {
-    transform: translateY(4px) translateX(-2px);
+	transform: translateY(4px) translateX(-2px);
 }
 
 .active span:nth-child(1) {
-    transform: translateY(4px) translateX(2px);
+	transform: translateY(4px) translateX(2px);
 }
 
 .active span:nth-child(2) {
-    transform: translateY(-4px);
+	transform: translateY(-4px);
 }
 
 .active span:nth-child(3) {
-    transform: translateY(4px) translateX(-2px);
+	transform: translateY(4px) translateX(-2px);
 }

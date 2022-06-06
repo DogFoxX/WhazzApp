@@ -1,355 +1,317 @@
 @media screen and (min-width: 1025px) and (max-width: 1300px) {
-    #menu {
-        width: 35% !important;
-    }
+	#menu {
+		width: 35% !important;
+	}
 }
 
 @media screen and (min-width: 901px) and (max-width: 1024px) {
-    #menu {
-        width: 35% !important;
-    }
+	#menu {
+		width: 35% !important;
+	}
 }
 
 @media screen and (max-width: 900px) {
-    #menu {
-        width: 40% !important;
-    }
+	#menu {
+		width: 40% !important;
+	}
 }
 
 .menu-backdrop {
-    position: fixed;
-    top: 30px;
-    left: 0;
-    height: calc(100% - 30px);
-    width: 100%;
-    background-color: var(--menu-backdrop);
-    backdrop-filter: blur(3px);
+	display: none;
+	position: fixed;
+	top: 30px;
+	left: 0;
+	height: calc(100% - 30px);
+	width: 100%;
+	background-color: var(--menu-backdrop);
+	backdrop-filter: blur(3px);
 }
 
 #menu {
-    display: flex;
-    position: fixed;
+	display: flex;
+	position: fixed;
 	top: 30px;
-    height: calc(100% - 30px);
-    width: 30%;
-    background-color: var(--menu-bg-color);
-    overflow: hidden;
-    border-right: 1px solid var(--menu-border-color);
+	height: calc(100% - 30px);
+	width: 30%;
+	background-color: var(--menu-bg-color);
+	overflow: hidden;
+	border-right: 1px solid var(--menu-border-color);
 }
 
 .menu-content {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    transition: transform 0.15s ease-in-out;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	transition: transform 0.15s ease-in-out;
 }
 
 .menu-back {
-    width: 53px;
+	width: 53px;
 }
 
 .back-btn {
-    padding: 5px;
-    color: var(--primary-font-color);
-    height: 34px;
-    height: 34px;
-    border-radius: 2px;
-    cursor: pointer;
+	padding: 5px;
+	color: var(--primary-font-color);
+	height: 34px;
+	height: 34px;
+	border-radius: 2px;
+	cursor: pointer;
 }
 
 .back-btn:focus-visible {
-    outline: 2px solid #53BDEB;
+	outline: 2px solid #53BDEB;
 }
 
 .menu-title {
-    flex-grow: 1;
-    overflow: hidden;
-    font-size: 19px;
-    line-height: normal;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-weight: 500;
-    margin-top: -3px;
-    color: var(--primary-font-color);
+	flex-grow: 1;
+	overflow: hidden;
+	font-size: 19px;
+	line-height: normal;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-weight: 500;
+	margin-top: -3px;
+	color: var(--primary-font-color);
 }
 
 .menu-list {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border-top: 1px solid var(--menu-primary-lines-color);
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	overflow-x: hidden;
+	border-top: 1px solid var(--menu-primary-lines-color);
 }
 
 .account {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
 }
 
 .account-details {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-right: 5px;
-    text-align: left;
-    height: 113px;
-    width: 100%;
-    color: var(--secondary-font-color);
-    cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-right: 5px;
+	text-align: left;
+	height: 113px;
+	width: 100%;
+	color: var(--secondary-font-color);
+	cursor: pointer;
 }
 
 .account-details:hover {
-    background-color: var(--menu-btn-bg-color);
+	background-color: var(--menu-btn-bg-color);
 }
 
 .account-details:focus-visible {
-    background-color: var(--menu-btn-bg-color);
+	background-color: var(--menu-btn-bg-color);
 }
 
 .account-icon {
-    padding: 16px 19px;
-    user-select: none;
-    pointer-events: none;
+	padding: 16px 19px;
+	user-select: none;
+	pointer-events: none;
 }
 
 .account-icon span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 82px;
-    width: 82px;
-    border-radius: 50%;
-    font-size: 3rem;
-    color: white;
-    background-color: #008069;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 82px;
+	width: 82px;
+	border-radius: 50%;
+	font-size: 52px;
+	color: white;
+	background-color: #008069;
 }
 
 .active-account-user {
-    display: flex;
-    flex-basis: auto;
-    flex-direction: column;
-    flex-grow: 1;
-    justify-content: center;
-    overflow: hidden;
-    white-space: pre;
+	display: flex;
+	flex-basis: auto;
+	flex-direction: column;
+	flex-grow: 1;
+	justify-content: center;
+	overflow: hidden;
+	white-space: pre;
 }
 
 .account-name {
-    font-size: 19px;
-    line-height: 28px;
-    white-space: pre;
-    text-overflow: ellipsis;
-    overflow: hidden;
+	font-size: 19px;
+	line-height: 28px;
+	white-space: pre;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .user-name {
-    margin-top: 2px;
-    text-align: left;
-    font-size: 15px;
-    line-height: 22px;
-    color: var(--tertiary-font-color);
-    white-space: pre;
-    text-overflow: ellipsis;
-    overflow: hidden;
+	margin-top: 2px;
+	text-align: left;
+	font-size: 15px;
+	line-height: 22px;
+	color: var(--tertiary-font-color);
+	white-space: pre;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .account-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 20px;
-    height: 59px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	right: 20px;
+	height: 59px;
 }
 
 .account-action-btn {
-    height: 40px;
-    width: 40px;
-    border-radius: 2px;
-    font-size: 1.1rem;
-    color: var(--primary-font-color);
-    cursor: pointer;
+	height: 40px;
+	width: 40px;
+	border-radius: 2px;
+	font-size: 18px;
+	color: var(--primary-font-color);
+	cursor: pointer;
 }
 
 .account-action-btn:nth-child(2) {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 
 .account-action-btn span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
 }
 
 .account-action-btn[class*="open"] span {
-    background-color: var(--dropdown-open);
+	background-color: var(--dropdown-open);
 }
 
 .account-action-btn:focus-visible {
-    outline: 2px solid #53BDEB;
+	outline: 2px solid #53BDEB;
 }
 
 .user-dropdown-container {
-    position: absolute;
-    top: 54px;
-    right: 55px;
-    z-index: 1000;
+	position: absolute;
+	top: 54px;
+	right: 55px;
+	z-index: 1000;
 }
 
 .user-dropdown-content {
-    min-width: 180px;
-    max-width: 300px;
-    border-radius: 3px;
-    background-color: var(--menu-dropdown-bg-color);
-    box-shadow: 0 2px 5px 0 #0b141a42, 0 2px 10px 0 #0b141a42;
-    transform-origin: right top;
-    overflow: hidden;
+	min-width: 180px;
+	max-width: 300px;
+	border-radius: 3px;
+	background-color: var(--menu-dropdown-bg-color);
+	box-shadow: 0 2px 5px 0 #0b141a42, 0 2px 10px 0 #0b141a42;
+	transform-origin: right top;
+	overflow: hidden;
 }
 
 .user-dropdown-list {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 9px 0;
-    white-space: nowrap;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding: 9px 0;
+	white-space: nowrap;
 }
 
 .user-dropdown-list button {
-    padding: 0 24px 0 24px;
-    height: 40px;
-    width: 100%;
-    text-align: left;
-    font-size: 14.5px;
-    color: var(--menu-dropdown-font-color);
-    line-height: 14.5px;
-    font-family: inherit;
-    cursor: pointer;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: pre;
+	padding: 0 24px 0 24px;
+	height: 40px;
+	width: 100%;
+	text-align: left;
+	font-size: 14.5px;
+	color: var(--menu-dropdown-font-color);
+	line-height: 14.5px;
+	font-family: inherit;
+	cursor: pointer;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: pre;
 }
 
 .user-dropdown-list button:hover {
-    background-color: var(--menu-dropdown-hover-bg-color);
+	background-color: var(--menu-dropdown-hover-bg-color);
 }
 
 .user-dropdown-list button:focus-visible {
-    background-color: var(--menu-dropdown-hover-bg-color);
-}
-
-.form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 7.5px 12px;
-}
-
-.form-content {
-    display: flex;
-    padding: 0 8px;
-    height: 35px;
-    width: 100%;
-    background-color: var(--menu-input-bg-color);
-    border-radius: 8px;
-    overflow: hidden;
+	background-color: var(--menu-dropdown-hover-bg-color);
 }
 
 .country-codes {
-    text-align: left;
-    width: 100px;
-    font-family: inherit;
-    font-size: 14px;
-    color: var(--secondary-font-color);
-    cursor: pointer;
-}
-
-.form-button {
-    width: 100%;
-    font-size: 14px;
-    color: var(--secondary-font-color);
-    cursor: pointer;
-}
-
-.search-input {
-    flex-grow: 1;
-    font-family: inherit;
-    font-size: 15px;
-    color: var(--secondary-font-color);
-    background-color: transparent;
-}
-
-.search-input::placeholder {
-    font-family: inherit;
-    font-size: 14px !important;
-    line-height: 20px;
-    color: var(--menu-input-placeholder-color);
+	text-align: left;
+	width: 100px;
+	font-family: inherit;
+	font-size: 14px;
+	color: var(--secondary-font-color);
+	cursor: pointer;
 }
 
 .menu-list-item {
-    display: flex;
-    align-items: center;
-    position: relative;
-    height: 60px;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	position: relative;
+	height: 60px;
+	cursor: pointer;
 }
 
 .menu-list-item:hover {
-    background-color: var(--menu-btn-bg-color);
+	background-color: var(--menu-btn-bg-color);
 }
 
 .menu-list-item:hover + .menu-list-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    height: 0;
-    width: 100%;
-    border: 1px solid var(--menu-secondary-lines-color);
+	content: "";
+	position: absolute;
+	top: 0;
+	height: 0;
+	width: 100%;
+	border: 1px solid var(--menu-secondary-lines-color);
 }
 
 .menu-list-item:focus-visible {
-    background-color: var(--menu-btn-bg-color);
+	background-color: var(--menu-btn-bg-color);
 }
 
 .menu-list-item:focus-visible + .menu-list-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    height: 0;
-    width: 100%;
-    border: 1px solid var(--menu-secondary-lines-color);
+	content: "";
+	position: absolute;
+	top: 0;
+	height: 0;
+	width: 100%;
+	border: 1px solid var(--menu-secondary-lines-color);
 }
 
 .menu-list-item-icon {
-    display: flex;
-    flex: none;
-    justify-content: center;
-    width: 74px;
-    font-size: 1.1rem;
-    color: #8696A0;
+	display: flex;
+	flex: none;
+	justify-content: center;
+	width: 74px;
+	font-size: 18px;
+	color: #8696A0;
 }
 
 .menu-list-item-label {
-    display: flex;
-    align-items: center;
-    height: 59px;
-    width: 100%;
-    font-size: 17px;
-    line-height: 22px;
-    color: var(--secondary-font-color);
-    overflow: hidden;
-    white-space: pre;
+	display: flex;
+	align-items: center;
+	height: 59px;
+	width: 100%;
+	font-size: 17px;
+	line-height: 22px;
+	color: var(--secondary-font-color);
+	overflow: hidden;
+	white-space: pre;
 }
 
 .menu-list-item:not(:first-of-type) .menu-list-item-label {
-    border-top: 1px solid var(--menu-primary-lines-color);
+	border-top: 1px solid var(--menu-primary-lines-color);
 }
 
 .menu-list-item-label span:nth-child(2) {
-    overflow: hidden;
-    text-overflow: ellipsis;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

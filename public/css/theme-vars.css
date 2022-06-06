@@ -1,59 +1,79 @@
 :root {
-    --body-bg-color: #F0F2F5;
-    --primary-bg-color: #00A884;
-    --primary-font-color: white;
-    --secondary-font-color: #111B21;
-    --tertiary-font-color: #667781;
+	--body-bg-color: #F0F2F5;
+	--primary-bg-color: #00A884;
+	--primary-font-color: white;
+	--secondary-font-color: #111B21;
+	--tertiary-font-color: #667781;
 	--scrollbar-bg-color: #CED0D1;
-    /* Title-Bar Buttons */
-    --title-btn-hover-bg-color: #009477;
-    /* Menu */
-    --menu-btn-dot-bg-color: #202C33;
-    --menu-backdrop: #FFFFFFD9;
-    --menu-bg-color: white;
-    --menu-header-bg-color: #008069;
-    --menu-border-color: #E9EDEF;
-    --menu-primary-lines-color: #E9EDEF;
-    --menu-secondary-lines-color: #F5F6F6;
-    --menu-btn-bg-color: #F5F6F6;
-    --menu-secondary-btn-color: #54656f;
-    --menu-input-bg-color: #f0f2f5;
-    --menu-input-placeholder-color: #667781;
-    --menu-dropdown-bg-color: white;
-    --menu-dropdown-hover-bg-color: #f5f6f6;
-    --menu-dropdown-font-color: #3B4A54;
-    --dropdown-open: #111B214C;
-    /* Keyboard Keys */
-    --key-bg-color: #E0E3E6;
-    --key-border-color: #B8BFC3;
+	/* Title-Bar Buttons */
+	--title-btn-hover-bg-color: #009477;
+	/* Menu */
+	--menu-btn-dot-bg-color: #202C33;
+	--menu-backdrop: #FFFFFFD9;
+	--menu-bg-color: white;
+	--menu-header-bg-color: #008069;
+	--menu-border-color: #E9EDEF;
+	--menu-primary-lines-color: #E9EDEF;
+	--menu-secondary-lines-color: #F5F6F6;
+	--menu-btn-bg-color: #F5F6F6;
+	--menu-secondary-btn-color: #54656f;
+	--menu-input-bg-color: #F0F2F5;
+	--menu-input-placeholder-color: #667781;
+	--menu-dropdown-bg-color: white;
+	--menu-dropdown-hover-bg-color: #f5f6f6;
+	--menu-dropdown-font-color: #3B4A54;
+	--dropdown-open: #111B214C;
+	/* Dialog */
+	--dialog-text-color: #3B4A54;
+	--dialog-bg-color: white;
+	--dialog-btn-border-color: #E9EDEF;
+	--dialog-btn-color: white;
+	--dialog-btn-bg-color: #008069;
+	--dialog-btn-hover-bg-color: #017561;
+	--dialog-btn-secondary-color: #008069;
+	--dialog-btn-secondary-hover-bg-color: white;
+	--dialog-input-bg-color: #F0F2F5;
+	/* Keyboard Keys */
+	--key-bg-color: #E0E3E6;
+	--key-border-color: #B8BFC3;
 }
 
 [theme="dark"] {
-    --body-bg-color: #111B21;
-    --primary-bg-color: #111B21;
-    --primary-font-color: #E9EDEF;
-    --secondary-font-color: #E9EDEF;
-    --tertiary-font-color: #8696A0;
+	--body-bg-color: #111B21;
+	--primary-bg-color: #111B21;
+	--primary-font-color: #E9EDEF;
+	--secondary-font-color: #E9EDEF;
+	--tertiary-font-color: #8696A0;
 	--scrollbar-bg-color: #374045;
-    /* Title-Bar Buttons */
-    --title-btn-hover-bg-color: #202C33;
-    /* Menu */
-    --menu-btn-dot-bg-color: #00A884;
-    --menu-backdrop: #0B141AD9;
-    --menu-bg-color: #111B21;
-    --menu-header-bg-color: #202C33;
-    --menu-border-color: #313D45;
-    --menu-primary-lines-color: #202C33;
-    --menu-secondary-lines-color: #202C33;
-    --menu-btn-bg-color: #202C33;
-    --menu-secondary-btn-color: #AEBAC1;
-    --menu-input-bg-color: #202C33;
-    --menu-input-placeholder-color: #8696a0;
-    --menu-dropdown-bg-color: #202C33;
-    --menu-dropdown-hover-bg-color: #182229;
-    --menu-dropdown-font-color: #D1D7DB;
-    --dropdown-open: #182229;
-    /* Keyboard keys */
-    --key-bg-color: #273137;
-    --key-border-color: #50585E;
+	/* Title-Bar Buttons */
+	--title-btn-hover-bg-color: #202C33;
+	/* Menu */
+	--menu-btn-dot-bg-color: #00A884;
+	--menu-backdrop: #0B141AD9;
+	--menu-bg-color: #111B21;
+	--menu-header-bg-color: #202C33;
+	--menu-border-color: #313D45;
+	--menu-primary-lines-color: #202C33;
+	--menu-secondary-lines-color: #202C33;
+	--menu-btn-bg-color: #202C33;
+	--menu-secondary-btn-color: #AEBAC1;
+	--menu-input-bg-color: #202C33;
+	--menu-input-placeholder-color: #8696A0;
+	--menu-dropdown-bg-color: #202C33;
+	--menu-dropdown-hover-bg-color: #182229;
+	--menu-dropdown-font-color: #D1D7DB;
+	--dropdown-open: #182229;
+	/* Dialog */
+	--dialog-text-color: #D1D7DB;
+	--dialog-bg-color: #202C33;
+	--dialog-btn-border-color: #8696A026;
+	--dialog-btn-color: #202C33;
+	--dialog-btn-bg-color: #00a884;
+	--dialog-btn-hover-bg-color: #06Cf9C;
+	--dialog-btn-secondary-color: #06Cf9C;
+	--dialog-btn-secondary-hover-bg-color: #E9EDEF0C;
+	--dialog-input-bg-color: #3B4A54;
+	/* Keyboard keys */
+	--key-bg-color: #273137;
+	--key-border-color: #50585E;
 }
