@@ -83,7 +83,7 @@
 
 ### Quick Reply Variables
 Quick Replies supports the use of variables which will be replaced with a value when clicking on a Quick Reply or using it's Hotkey
-- [user-name]
+- ```{userName}```
     - Replaced with the active User Name
 
 # Acknowledgements
