@@ -81,10 +81,29 @@
     - Use ```CTRL+#```, ```CTRL+SHIFT+#```, ```CTRL+ALT+#``` or ```CTRL+SHIFT+ALT+#```
     - *#* = any number from ```0-9```
 
-### Quick Reply Variables
+### Quick Reply Dynamic Variables (Coming to v0.9.4)
 Quick Replies supports the use of variables which will be replaced with a value when clicking on a Quick Reply or using it's Hotkey
-- ```{userName}```
+- **{userName}**
     - Replaced with the active User Name
+- **{dateTime12h}**
+    - Medium lenght date with 12-hour time
+    - Outputs ```Mon, 1 Jan 2022, 10:08 pm```
+- **{dateTime24h}**
+    - Medium lenght date with 24-hour time
+    - Outputs ```Mon, 1 Jan 2022, 22:08```
+- **{dateLong}**
+    - Long date only
+    - Outputs ```Monday, 1 January 2022```
+- **{dateMed}**
+    - Medium lenght date only
+    - Outputs ```Mon, 1 Jan 2022```
+- **{dateShort}**
+    - Short date only
+    - Outputs ```01/01/22```
+- **{time12h}**
+    - 12-hour time only
+- **{time24h}**
+    - 24-hour time only
 
 # Acknowledgements
 ### WhazzApp will always remain free to download and use.
