@@ -27,7 +27,7 @@
     - Select Country Code > Type in a registered number > Start chatting :rocket:
     - Easy :+1:
 -  ***Quick Replies***
-    - For when typing long messages over and over again is time consuming :clock3:
+    - When typing long messages over and over again is time consuming :clock3:
     - Create your own Quick Replies with our intuitive Quick Reply Creator :pencil2:
     - Set Hotkeys for each Quick Reply for easy access :keyboard:
     - See more at the [Quick Replies](#quick-replies) Section
@@ -42,7 +42,7 @@
 
 # About :information_source:
 ### WhazzApp is an Electron based dektop app, using Svelte as it's framework.
-### TL;DR WhatsApp Web is loaded using Electron's Webview Tag, and the rest of the functions are built around that. Great for businesses using WhatsApp as a way to connect with customers.
+### TL;DR WhatsApp Web is loaded using Electron's Webview Tag, and the rest of the functions are built around that. Great for businesses that use WhatsApp as a way to communicate with customers.
 
 # Features :star:
 ### Design & UI
