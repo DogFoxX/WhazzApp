@@ -1,6 +1,7 @@
 :root {
 	--body-bg-color: #F0F2F5;
 	--primary-bg-color: #00A884;
+	--secondary-bg-color: #E9EDEF;
 	--primary-font-color: white;
 	--secondary-font-color: #111B21;
 	--tertiary-font-color: #667781;
@@ -41,6 +42,7 @@
 [theme="dark"] {
 	--body-bg-color: #111B21;
 	--primary-bg-color: #111B21;
+	--secondary-bg-color: #202C33;
 	--primary-font-color: #E9EDEF;
 	--secondary-font-color: #E9EDEF;
 	--tertiary-font-color: #8696A0;

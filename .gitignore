@@ -1,5 +1,6 @@
 node_modules
 dist
+installer.nsh
 electron-builder.json
 dev-app-update.yml
 package-lock.json

@@ -26,10 +26,9 @@
 	});
 
 	const save = () => {
-		let inputs = content.querySelectorAll('.required');
-		let userInputs = userNames ? userNames.querySelectorAll('.required') : [];
+		let inputs = content.querySelectorAll('.form-input');
+		let userInputs = userNames ? userNames.querySelectorAll('.form-input') : [];
 		let users = [];
-		let flag = Boolean;
 
 		for (i in accounts) {
 			if (accountName.value.toUpperCase() == accounts[i].name.toUpperCase()) {
@@ -39,16 +38,13 @@
 			}
 		};
 
-		for (i = 0; i < inputs.length; i++) {
-			if (!inputs[i].value) {
-				displayError('Required fields cannot be empty');
-				inputs[i].parentNode.style.outline = '1px solid #F54949';
-				flag = true;
-			}
-			else {flag = false};
-		};
+		let emptyInputs = Array.from(inputs).filter( input => !input.value);
 
-		if (!flag) { return };
+		if (emptyInputs.length > 0) {
+			displayError('Required fields cannot be empty');
+			Array.from(inputs).filter( input => !input.value ? input.parentNode.style.outline = '1px solid #F54949' : '')
+			return;
+		};
 
 		if (userNames) {
 			for (i = 0; i < userInputs.length; i++) {
@@ -131,12 +127,12 @@
 		<p class="form-title">Account name</p>
 		<div class="form">
 			<div class="form-content dialog" spellcheck="false">
-				<input bind:this={accountName} on:input={accountNameInput} type="text" class="form-input required" placeholder="ex. Main Account">
+				<input bind:this={accountName} on:input={accountNameInput} type="text" class="form-input" placeholder="ex. Main Account">
 			</div>
 		</div>
-		<div class="checkbox">
-			<input bind:checked={addUserCheck} id="add-users" class="dialog-checkbox" type="checkbox">
-			<label for="add-users" class="dialog-checkbox-label">Add users to this account</label>
+		<div class="checkbox-container">
+			<input bind:checked={addUserCheck} id="add-users" class="checkbox" type="checkbox">
+			<label for="add-users" class="checkbox-label">Add users to this account</label>
 		</div>
 	</div>
 	{#if addUserCheck}
@@ -147,7 +143,7 @@
 					<div class="form">
 						<div class="form-content dialog" spellcheck="false">
 							<!-- svelte-ignore a11y-autofocus -->
-							<input on:input={userNameInput} type="text" id="userName" class="form-input required" placeholder="User #{i + 1}" autofocus>
+							<input on:input={userNameInput} type="text" class="form-input" placeholder="User #{i + 1}" autofocus>
 						</div>
 					</div>
 				{/each}

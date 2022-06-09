@@ -10,20 +10,23 @@
 	import Settings from './sub-menus/settings.svelte';
 
 	// Constants
-	const { ipcRenderer } = require('electron')
-	const Store = require('electron-store');
+	const { ipcRenderer } = require('electron');
 
 	//Exports
 	export let openMenu,
 			dropdownOpen,
 			numberSearch,
+			showNotify,
+			checkForUpdate,
+			settStore,
+			countryCode,
 			accStore,
 			accounts,
 			accountName,
 			userName,
 			replyStore,
-			quickReplies,
-			AppDetails = [];
+			AppDetails = [],
+			dateTimeVariables;
 
 	// Variables
 	let menu,
@@ -33,25 +36,6 @@
 		dialogWindow,
 		number;
 
-	let settStore = new Store(
-			{
-				name: 'settings',
-				cwd: 'Partitions',
-				fileExtension: '',
-				watch: true,
-				defaults: {
-					settings: [],
-					'country-code': {
-						name: 'United States',
-						code: '+1',
-						flag: 'flag-icon-us'
-					}
-				}
-			}
-		),
-		settings = settStore.get('settings'),
-		countryCode = settStore.get('country-code');
-
 	// Functions
 	onMount( async () => {
 		AppDetails = await ipcRenderer.invoke('get-details');
@@ -59,14 +43,8 @@
 	});
 
 	onDestroy(() => {
-		subMenuContent.set({component: null, title: null});
-		unsubscribe();
 		dropdownOpen = false;
-	});
-
-	const unsubscribe = settStore.onDidAnyChange(() => {
-		settings = settStore.get('settings');
-		countryCode = settStore.get('country-code');
+		subMenuContent.set({component: null, title: null});
 	});
 
 	const menuKeydown = (e) => {
@@ -197,7 +175,7 @@
 				</div>
 			</div>
 			<div class="menu-list">
-				<button on:click={() => subMenuContent.set({component: QuickReplies, title: 'Quick Replies', replyStore})} class="menu-list-item reply-menu-btn" aria-disabled={accountName ? false : true} tabindex={accountName ? "" : "-1"}>
+				<button on:click={() => subMenuContent.set({component: QuickReplies, title: 'Quick Replies', replyStore, userName, dateTimeVariables, showNotify})} class="menu-list-item reply-menu-btn" aria-disabled={accountName ? false : true} tabindex={accountName ? "" : "-1"}>
 					<span class="menu-list-item-icon">
 						<span class="fa-solid fa-bolt" />
 					</span>
@@ -213,7 +191,7 @@
 						<span>Settings</span>
 					</span>
 				</button>
-				<button class="menu-list-item">
+				<button on:click={checkForUpdate} class="menu-list-item">
 					<span class="menu-list-item-icon">
 						<span class="fa-solid fa-down-from-line" />
 					</span>
@@ -268,7 +246,7 @@
 					</div>
 				</div>
 			</header>
-			<svelte:component this={$subMenuContent.component} {accounts} {quickReplies}></svelte:component>
+			<svelte:component this={$subMenuContent.component}></svelte:component>
 		</div>
 	{/if}
 </div>

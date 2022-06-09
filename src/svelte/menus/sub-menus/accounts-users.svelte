@@ -3,18 +3,17 @@
 	import { subMenuContent, dialog } from '../../../stores.js';
 	import AddAccount from '../../dialogs/add-account.svelte';
 
-	// Constants
-
-
-	// Exports
-	export let accounts;
-
 	// Variables
 	let i,
 		list,
-		accStore = $subMenuContent.accStore;
+		accStore = $subMenuContent.accStore,
+		accounts = accStore.get('accounts');
 
 	// Functions
+	accStore.onDidAnyChange(() => {
+		accounts = accStore.get('accounts');
+	});
+
 	const searchInput = (e) => {
 		let listBtns = list.querySelectorAll('button')
 		let value = e.target.value.toUpperCase()

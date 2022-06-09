@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, shell, Tray, Menu, nativeImage  } = require('electron');
 const { autoUpdater } = require('electron-updater');
 require("@electron/remote/main").initialize();
 const windowStateKeeper = require('electron-window-state');
@@ -15,7 +15,7 @@ const { registerGlobal, unregisterGlobal } = require("electron-shortcuts");
 app.setAsDefaultProtocolClient('whatsapp');
 app.setAppUserModelId(app.name);
 
-let mainWindow;
+let mainWindow, tray, icon;
 
 let hotkeyStore = new Store({
 	name: 'hotkeys',
@@ -72,9 +72,7 @@ function createWindow() {
 	
 	if (isDev()) {
 		mainWindow.openDevTools();
-		
 		mainWindow.setIcon('./resources/icon.ico');
-		
 		mainWindow.loadURL('http://localhost:5000/');
 	}
 	else {
@@ -111,9 +109,16 @@ else {
 	app.on('ready', () => {
 		createWindow();
 
-		if (isDev()) {
-			autoUpdater.checkForUpdates();
-		};
+		// Start with args
+		let arg = process.argv[1];
+
+		switch (arg) {
+			case '-min':
+				mainWindow.hide();
+				break;
+			default: 
+				break;
+		}
 
 		// Insert Webview Preload
 		mainWindow.webContents.on('will-attach-webview', (e, webPreferences) => {
@@ -137,6 +142,24 @@ else {
 				});
 			};
 		};
+
+		// Tray Icon
+		icon = isDev() ? './resources/icon.ico': `${path.dirname(process.execPath)}/resources/icon.ico`;
+		tray = new Tray(icon);
+
+		const trayMenu = Menu.buildFromTemplate([
+			{label: 'WhazzApp', enabled: false},
+			{ type: 'separator' },
+			{ label: 'Hide', click: () => {mainWindow.hide()} },
+			{ label: 'Exit', click: () => {app.quit()} }
+		]);
+  
+		tray.setContextMenu(trayMenu);
+		tray.setToolTip(app.name);
+
+		tray.on('click', () => {
+			!mainWindow.isFocused() || !mainWindow.isFocused() ? mainWindow.show() : '';
+		});
 	});
 };
 

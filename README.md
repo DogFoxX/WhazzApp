@@ -15,8 +15,6 @@
     </div>
     <br>
     <img src="https://github.com/DogFoxX/assets/blob/master/whazzapp/whazzapp.png?raw=true" alt="WhazzApp Banner" width="100%" />
-    <br>
-    <h1>VERSION <ins><a href="https://github.com/DogFoxX/WhazzApp/releases/tag/v0.9.3">0.9.3 PRE-RELEASE IS HERE</a></ins>!!!</h1>
 </div>
 
 ### An ElectronJS/Svelte based WhatsApp Desktop alternative, with extra functionality
@@ -27,7 +25,7 @@
     - Select Country Code > Type in a registered number > Start chatting :rocket:
     - Easy :+1:
 -  ***Quick Replies***
-    - For when typing long messages over and over again is time consuming :clock3:
+    - When typing long messages over and over again is time consuming :clock3:
     - Create your own Quick Replies with our intuitive Quick Reply Creator :pencil2:
     - Set Hotkeys for each Quick Reply for easy access :keyboard:
     - See more at the [Quick Replies](#quick-replies) Section
@@ -42,19 +40,19 @@
 
 # About :information_source:
 ### WhazzApp is an Electron based dektop app, using Svelte as it's framework.
-### TL;DR WhatsApp Web is loaded using Electron's Webview Tag, and the rest of the functions are built around that. Great for businesses using WhatsApp as a way to connect with customers.
+### TL;DR WhatsApp Web is loaded using Electron's Webview Tag, and the rest of the functions are built around that. Great for businesses that use WhatsApp as a way to communicate with customers.
 
 # Features :star:
-### Design & UI
+## Design & UI
 - Simplistic and easy to navigate Menu System
 - Carefully designed to fit naturally with WhatsApp Web
 - Fully supports WhatsApp Web's Dark/Light theme
 
-### Keyboard Shortcuts (More will be added as needed)
+## Keyboard Shortcuts (More will be added as needed)
 - Press ```F2``` to open the Main Menu
 - Press ```F5``` to refresh WhatsApp Web
 
-### Accounts and Users
+## Accounts and Users
 - Open the Main Menu and click on the green User Icon to switch to another account or create a new one
 - To create an Account, click on ```Add Account```
 - Duplicate Account Names aren't allowed, for obvious reasons
@@ -63,7 +61,7 @@
 - To switch to a different User, open the Main Menu, and click on ```⇅``` found at the very top to open a dropdown list of available users
 - To log out of an Account, open the Main Menu, and click on ```[→``` found at the very top
 
-### Number Search & Country Codes
+## Number Search & Country Codes
 #### One of the best features of WhazzApp is the ability to open a chat with any number registered to WhatsApp. WhazzApp uses the WhatsApp API ```https://web.whatsapp.com/send?phone=``` for this.
 
 - After opening the Main Menu, users will find an input block to enter a number
@@ -71,7 +69,7 @@
 - Choose the Country Code associated with the number
 - Numbers can be entered with or without the leading Country Code. Numbers starting with ```0``` will automatically be corrected with a leading Country Code
 
-### Quick Replies
+## Quick Replies
 - Open the Main Menu and click on Quick Replies to see a list of created Quick Replies
 - Clicking on a Quick Reply will copy it's text to the clipboard
 - To create a Quick Reply, click on ```Add Quick Reply```
@@ -81,10 +79,58 @@
     - Use ```CTRL+#```, ```CTRL+SHIFT+#```, ```CTRL+ALT+#``` or ```CTRL+SHIFT+ALT+#```
     - *#* = any number from ```0-9```
 
-### Quick Reply Variables
+### Quick Reply Dynamic Variables
 Quick Replies supports the use of variables which will be replaced with a value when clicking on a Quick Reply or using it's Hotkey
-- [user-name]
+- **{userName}**
     - Replaced with the active User Name
+- **{dateTime12h}**
+    - Medium lenght date with 12-hour time
+    - Outputs ```Mon, 1 Jan 2022, 10:08 pm```
+- **{dateTime24h}**
+    - Medium lenght date with 24-hour time
+    - Outputs ```Mon, 1 Jan 2022, 22:08```
+- **{dateLong}**
+    - Long date only
+    - Outputs ```Monday, 1 January 2022```
+- **{dateMed}**
+    - Medium lenght date only
+    - Outputs ```Mon, 1 Jan 2022```
+- **{dateShort}**
+    - Short date only
+    - Outputs ```01/01/22```
+- **{time12h}**
+    - 12-hour time only
+- **{time24h}**
+    - 24-hour time only
+
+## Settings
+### Windows Settings
+- Start with Windows (toggle)
+    - WhazzApp will launch upon Windows start-up
+- Start minimized (toggle)
+    - WhazzApp will launch minimized to the System Tray
+- Minimize to System Tray (toggle)
+    - Clicking ```✖``` will minimize WhazzApp to the System Tray
+
+### Auto Update Settings
+- Enable Auto Updates (toggle)
+    - Enabled: WhazzApp will check for updates automatically
+    - Disabled: Users will have to check for updates manually
+- Update frequency (dropdown)
+    - WhazzApp will regularly check for updates based on the frequency chosen
+    - Choose from 10, 15, 30 or 60 minutes
+    - This setting will be disabled when <ins>Enable Auto Updates</ins> is disabled
+- Auto download updates (toggle)
+    - Enabled: Updates will be downloaded automatically
+    - Disabled: Users will be promted to download updates manually
+
+When <ins>Auto download updates</ins> is disabled, users can manually check for updates using ```Check for updates``` in the Main Menu.
+
+Auto Update notifications will prompt users to download updates (only when <ins>Auto download updates</ins> is disabled), and restart WhazzApp when an update is ready to be installed.
+
+- Allow pre-releases (toggle)
+    - WhazzApp will check for pre-release updates
+    - Not recommended
 
 # Acknowledgements
 ### WhazzApp will always remain free to download and use.
@@ -92,15 +138,15 @@ Quick Replies supports the use of variables which will be replaced with a value 
 
 ### WhazzApp uses the following npm packages and thanks each developer for their work:
 - electron | repo: <a href="https://github.com/electron/electron">electron/electron</a>
-- electron-builer/electron-updater | repo: <a href="https://github.com/electron-userland/electron-builder">electron-userland/electron-builder</a>
+- electron-builer & electron-updater | repo: <a href="https://github.com/electron-userland/electron-builder">electron-userland/electron-builder</a>
 - @electron/remote | repo: <a href="https://github.com/electron/remote">electron/remote</a>
 - electron-serve | repo: <a href="https://github.com/sindresorhus/electron-serve">sindresorhus/electron-serve</a>
 - electron-context-menu | repo: <a href="https://github.com/sindresorhus/electron-context-menu">sindresorhus/electron-context-menu</a> 
 - electron-store | repo: <a href="https://github.com/sindresorhus/electron-store">sindresorhus/electron-store</a>
-- electron-shortcuts | repo: <a href="https://github.com/mlrv/electron-shortcuts">mlrv/electron-shortcut</a>
+- electron-shortcuts | repo: <a href="https://github.com/mlrv/electron-shortcuts">mlrv/electron-shortcuts</a>
 - electron-window-state | repo: <a href="https://github.com/mawie81/electron-window-state">mawie81/electron-window-state</a>
+- electron-log | repo: <a href="https://github.com/megahertz/electron-log">megahertz/electron-log</a>
 - randomstring | repo: <a href="https://github.com/klughammer/node-randomstring">klughammer/node-randomstring</a>
-- windows-shortcuts | repo: <a href="https://github.com/j201/windows-shortcuts">j201/windows-shortcuts</a>
 - rollup | repo: <a href="https://github.com/rollup/rollup">rollup/rollup</a>
 - rollup-plugins | repo: <a href="https://github.com/rollup/plugins">rollup/plugins</a>
 - rollup-plugin-css-only | repo: <a href="https://github.com/thgh/rollup-plugin-css-only">thgh/rollup-plugin-css-only</a>

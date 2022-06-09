@@ -67,13 +67,38 @@ input:disabled {
 	color: #ccc;
 }
 
-.checkbox {
+.checkbox-container {
 	margin-top: 5px;
 	display: flex;
 	align-items: center;
 }
 
-.checkbox label {
+.checkbox-container:not(:nth-child(1)) {
+	margin-top: 20px;
+}
+
+.checkbox-container label {
+	line-height: 22px;
+}
+
+.check-description {
+	padding: 5px 0 0 16px;
+	font-size: 12.5px;
+	color: var(--tertiary-font-color);
+}
+
+.checkbox, .checkbox-label {
+	cursor: pointer;
+}
+
+.select-container {
+	margin-top: 15px;
+	display: flex;
+	align-items: center;
+}
+
+.select-container label {
+	font-size: 13px;
 	line-height: 22px;
 }
 
@@ -85,6 +110,19 @@ input[type=checkbox] {
 }
 
 input[type=checkbox]:focus-visible {
+	outline: 2px dotted #53BDEB;
+}
+
+select {
+	margin-left: 10px;
+	height: 20px;
+	font-size: 13px;
+	color: var(--secondary-font-color);
+	background-color: var(--secondary-bg-color);
+	outline: 0;
+}
+
+.select:focus-visible {
 	outline: 2px dotted #53BDEB;
 }
 

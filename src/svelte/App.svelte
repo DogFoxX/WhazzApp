@@ -5,17 +5,98 @@
     import { expoIn } from 'svelte/easing';
 	import { subMenuContent, dialog } from '../stores.js';
 	import MainMenu from '../svelte/menus/main-menu.svelte';
-	import QuickReplies from './menus/sub-menus/quick-replies.svelte';
 
 	// Constants
 	const { ipcRenderer, clipboard } = require('electron');
+	const remote = require('@electron/remote');
 	const mainWindow = require('@electron/remote').getCurrentWindow();
+	const autoUpdater = remote.require('electron-updater').autoUpdater;
+	const log = require('electron-log');
+	const path = require('path');
 	const Store = require('electron-store');
+	const dateTimeVariables = {
+			dateTime12h: new Date().toLocaleDateString(navigator.language, {
+				weekday: 'short',
+				day: 'numeric',
+				month: 'short',
+				year: 'numeric',
+				hour: '2-digit',
+				minute: '2-digit',
+				hour12: true
+			}),
+			dateTime24h: new Date().toLocaleDateString(navigator.language, {
+				weekday: 'short',
+				day: 'numeric',
+				month: 'short',
+				year: 'numeric',
+				hour: '2-digit',
+				minute: '2-digit',
+				hour12: false
+			}),
+			dateLong: new Date().toLocaleDateString(navigator.language, {
+				weekday: 'long',
+				day: 'numeric',
+				month: 'long',
+				year: 'numeric'
+			}),
+			dateMed: new Date().toLocaleDateString(navigator.language, {
+				weekday: 'short',
+				day: 'numeric',
+				month: 'short',
+				year: 'numeric'
+			}),
+			dateShort: new Date().toLocaleDateString(),
+			time12h: new Date().toLocaleTimeString(navigator.language, {
+				hour: '2-digit',
+				minute: '2-digit',
+				hour12: true
+			}),
+			time24h: new Date().toLocaleTimeString(navigator.language, {
+				hour: '2-digit',
+				minute: '2-digit',
+				hour12: false
+			})
+		};
 
-	// Exports
-	
+	//#region Logger Settings
+	log.transports.console.level = false;
+	log.transports.file.format = '{m}/{d}/{y}, {h}:{i}:{s} [{level}]>> {text}';
+	log.transports.file.resolvePath = () => path.join(remote.app.getPath('userData'), 'logs/update_log.log');
+	//#endregion
 
 	// Variables
+
+	//#region Stores
+	let settStore = new Store(
+			{
+				name: 'settings',
+				cwd: 'Partitions',
+				fileExtension: '',
+				watch: true,
+				defaults: {
+					'windows-settings': {
+						autoLaunch: true,
+						startMin: false,
+						minToTray: true
+					},
+					'updates': {
+						allowPrerelease: false,
+						autoDownload: true,
+						checkUpdates: true,
+						updateFreq: 900000
+					},
+					'country-code': {
+						name: 'United States',
+						code: '+1',
+						flag: 'flag-icon-us'
+					}
+				}
+			}
+		),
+		windowsSettings = settStore.get('windows-settings'),
+		updates = settStore.get('updates'),
+		countryCode = settStore.get('country-code');
+
 	let accStore = new Store(
 			{
 				name: 'accounts',
@@ -36,50 +117,23 @@
 				name: 'hotkeys',
 				fileExtension: ''
 			}
-		),
-		hotkeys = hotkeyStore.get('hotkeys');
+		);
 
 	let replyStore,
 		quickReplies = [];
-
-	const getActiveAccountDir = () => {
-		if (accounts) {
-			return accounts.filter(({active}) => active == true).map(({id}) => id);
-		};
-	};
-
-	const createReplyStore = () => {
-		if (getActiveAccountDir() != '') {
-			replyStore = new Store(
-				{
-					name: 'quick-replies',
-					cwd: `Partitions/${getActiveAccountDir()}`,
-					fileExtension: '',
-					watch: true,
-					defaults: {
-						'quick-replies': []
-					}
-				}
-			);
-			quickReplies = replyStore.get('quick-replies');
-
-			replyStore.onDidAnyChange(() => {
-				quickReplies = replyStore.get('quick-replies');
-				hotkeyStore.set('hotkeys', quickReplies.filter(({hotkey}) => hotkey != '').map(({hotkey}) => hotkey));
-    		});
-
-			hotkeyStore.set('hotkeys', quickReplies.filter(({hotkey}) => hotkey != '').map(({hotkey}) => hotkey));
-		};
-	};
+	//#endregion
 
 	let isMax = Boolean,
 		menuOpen = Boolean(false),
 		dropdownOpen = Boolean(false);
 
 	let title = mainWindow.getTitle(),
+		updateInterval,
 		menu,
 		menuBtn,
-		webview;
+		webview,
+		notification,
+		notifyBtnAction;
 
 	//#region Functions
 
@@ -92,6 +146,18 @@
         });
 		
 		createReplyStore();
+
+		// Updater Settings
+		autoUpdater.autoDownload = updates.autoDownload;
+		autoUpdater.allowPrerelease = updates.allowPrerelease;
+		autoUpdater.logger = log;
+		autoUpdater.logger.transports.file.level = "info";
+		autoUpdater.logger.transports.file.level = "debug";
+		autoUpdater.logger.transports.file.level = "error";
+		autoUpdater.logger.transports.file.level = "warn";
+
+		windowsSett();
+		updaterSett();
 	});
 
 	// Get Webview Title and Theme
@@ -103,23 +169,26 @@
 		document.body.setAttribute('theme', color);
 	});
 
-	// Window Functions
+	//#region Window Functions
 	const windowResize = () => {
 		mainWindow.isMaximized() ? isMax = true : isMax = false;
 	};
 
 	const windowAction = (e) => {
-		// Close, Minimize, Maximize
-		if (e.target.id == 'close') {
-			mainWindow.close();
+		switch (e.target.id) {
+			case 'close':
+				windowsSettings.minToTray ? mainWindow.hide() : mainWindow.close();
+				break;
+			case 'min':
+				mainWindow.minimize();
+				break;
+			case 'max':
+				mainWindow.isMaximized() ? mainWindow.restore() : mainWindow.maximize();
+				break;
+			default:
+				break;
 		}
-		if (e.target.id == 'min') {
-			mainWindow.minimize();
-		}
-		if (e.target.id == 'max') {
-			mainWindow.isMaximized() ? mainWindow.restore() : mainWindow.maximize();
-		}
-		webview.focus();
+		webview ? webview.focus() : '';
 	};
 
 	const windowMousedown = (e) => {
@@ -158,21 +227,51 @@
 				webview.reload();
 				break;
 			default:
-				if (quickReplies != []) {
-					clipboard.writeText(quickReplies.filter(({hotkey}) => hotkey == key)[0].value);
+				if (quickReplies != [] && accountName) {
+					let name = quickReplies.filter(({hotkey}) => hotkey == key)[0].name;
+					let value = quickReplies.filter(({hotkey}) => hotkey == key)[0].value;
+
+					if (value.includes('{userName}')) {
+						value = value.replaceAll('{userName}', userName);
+					};
+					if (value.includes('{dateTime12h}')) {
+						value = value.replaceAll('{dateTime12h}', dateTimeVariables.dateTime12h);
+					};
+					if (value.includes('{dateTime24h}')) {
+						value = value.replaceAll('{dateTime24h}', dateTimeVariables.dateTime24h);
+					};
+					if (value.includes('{dateLong}')) {
+						value = value.replaceAll('{dateLong}', dateTimeVariables.dateLong);
+					};
+					if (value.includes('{dateMed}')) {
+						value = value.replaceAll('{dateMed}', dateTimeVariables.dateMed);
+					};
+					if (value.includes('{dateShort}')) {
+						value = value.replaceAll('{dateShort}', dateTimeVariables.dateShort);
+					};
+					if (value.includes('{time12h}')) {
+						value = value.replaceAll('{time12h}', dateTimeVariables.time12h);
+					};
+					if (value.includes('{time24h}')) {
+						value = value.replaceAll('{time24h}', dateTimeVariables.time24h);
+					};
+					
+					clipboard.writeText(value);
+					showNotify({text: `Copied: ${name}`, button: null}, true);
 				};
 				break;
-		}
+		};
 	});
+	//#endregion
 
-	// Menu Functions
-	export const openMenu = () => {
+	//#region Menu Functions
+	const openMenu = () => {
 		menuOpen = !menuOpen;
 		menuOpen ? menuBtn.classList.add('active') : menuBtn.classList.remove('active');
 		webview ? menuOpen ? webview.blur() : webview.focus() : '';
 	};
 
-	export const numberSearch = (e, number, code, callback) => {
+	const numberSearch = (e, number, code, callback) => {
 		if (e.key === 'Enter') {
 			if (number) {
 				let url = 'https://web.whatsapp.com/send?phone='
@@ -188,6 +287,72 @@
 		}
 	}
 	//#endregion
+
+	//#region Stores Functions
+	const windowsSett = () => {
+		remote.app.setLoginItemSettings({
+			openAtLogin: windowsSettings.autoLaunch,
+			name: 'WhazzApp',
+			path: `"${remote.process.execPath}"`,
+			args: windowsSettings.startMin ? ["-min"] : ''
+		});
+	};
+
+	const updaterSett = () => {
+		autoUpdater.autoDownload = updates.autoDownload;
+		autoUpdater.allowPrerelease = updates.allowPrerelease;
+
+		if (updates.checkUpdates) {
+			autoUpdater.checkForUpdates();
+			updateInterval = setInterval(() => {
+				autoUpdater.checkForUpdates();
+			}, updates.updateFreq);
+		};
+	};
+
+	settStore.onDidChange('windows-settings', () => {
+		windowsSettings = settStore.get('windows-settings');
+		windowsSett();
+	});
+
+	settStore.onDidChange('updates', () => {
+		updates = settStore.get('updates');
+		updaterSett();
+	});
+
+	settStore.onDidChange('country-code', () => {
+		countryCode = settStore.get('country-code');
+	});
+
+	const getActiveAccountDir = () => {
+		if (accounts) {
+			return accounts.filter(({active}) => active == true).map(({id}) => id);
+		};
+	};
+
+	const createReplyStore = () => {
+		if (getActiveAccountDir() != '') {
+			replyStore = new Store(
+				{
+					name: 'quick-replies',
+					cwd: `Partitions/${getActiveAccountDir()}`,
+					fileExtension: '',
+					watch: true,
+					defaults: {
+						'quick-replies': []
+					}
+				}
+			);
+			quickReplies = replyStore.get('quick-replies');
+
+			replyStore.onDidAnyChange(() => {
+				quickReplies = replyStore.get('quick-replies');
+				hotkeyStore.set('hotkeys', quickReplies.filter(({hotkey}) => hotkey != '').map(({hotkey}) => hotkey));
+    		});
+
+			hotkeyStore.set('hotkeys', quickReplies.filter(({hotkey}) => hotkey != '').map(({hotkey}) => hotkey));
+		};
+	};
 
 	accStore.onDidAnyChange(() => {
         accounts = accStore.get('accounts');
@@ -219,6 +384,37 @@
         };
         return callback({account, user});
     };
+
+	//#region Notifications and Updates Handles
+	const showNotify = (args, fade) => {
+		notification = args;
+
+		if (fade) {
+			setTimeout(() => {
+				notification = null;
+			}, 5000);
+		};
+	};
+
+	autoUpdater.on('update-available', (info) => {
+		if (autoUpdater.autoDownload) { return };
+
+		showNotify({text: `Update ${info.version} available`, button: 'Download Now'}, false);
+		notifyBtnAction = () => {
+			autoUpdater.downloadUpdate();
+			notification = null;
+		}
+	});
+
+	autoUpdater.on('update-downloaded', (info) => {
+		showNotify({text: `Update ${info.version} downloaded`, button: 'Restart Now'}, false);
+		notifyBtnAction = () => autoUpdater.quitAndInstall();
+	});
+
+	const checkForUpdate = () => {
+		autoUpdater.checkForUpdates();
+	};
+	//#endregion
 </script>
 
 <svelte:window on:resize={windowResize} on:keydown={windowKeydown} on:mousedown={windowMousedown} />
@@ -261,7 +457,7 @@
 {#if menuOpen}
 	<div transition:fade={{duration: 180}} on:mousedown|preventDefault class="menu-backdrop" />
 	<section bind:this={menu} in:fly={{x: -170, duration: 280, opacity: 1}} out:fly={{x: -menu.offsetWidth, duration: 300, opacity: 1, easing: expoIn}} id="menu">
-		<MainMenu {openMenu} bind:dropdownOpen={dropdownOpen} {numberSearch} {accStore} {accounts} {accountName} {userName} {replyStore} {quickReplies} />
+		<MainMenu {openMenu} bind:dropdownOpen={dropdownOpen} {numberSearch} {showNotify} {checkForUpdate} {settStore} {countryCode} {accStore} {accounts} {accountName} {userName} {replyStore} {dateTimeVariables} />
 	</section>
 {/if}
 
@@ -280,6 +476,20 @@
 		<span class="splash-text">Welcome to WhazzApp</span>
 		<span class="splash-text">To get started click <span class="keyboard-key fa-solid fa-ellipsis" /> or press <span class="keyboard-key">F2</span> to open menu</span>
 	</section>
+{/if}
+
+{#if notification}
+	<div in:fly={{y: 50, duration: 200, opacity: 1}} out:fade={{duration: 100}} class="notification">
+		<span>{notification.text}</span>
+		{#if notification.button}
+			<button on:click={notifyBtnAction} class="notification-action">{notification.button}</button>
+		{/if}
+		<button on:click={() => notification = null} class="notification-close">
+			<svg viewBox="0 0 24 24" width="24" height="24" class="">
+				<path fill="currentColor" d="M17.25 7.8 16.2 6.75l-4.2 4.2-4.2-4.2L6.75 7.8l4.2 4.2-4.2 4.2 1.05 1.05 4.2-4.2 4.2 4.2 1.05-1.05-4.2-4.2 4.2-4.2z"></path>
+			</svg>
+		</button>
+	</div>
 {/if}
 
 <style>

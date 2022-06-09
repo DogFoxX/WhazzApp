@@ -5,9 +5,6 @@
 	// Constants
 	const countryCodes = require('./resources/country-codes.json');
 
-	// Exports
-
-
 	// Variables
 	let i,
 		list,

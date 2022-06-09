@@ -1,7 +1,7 @@
 {
 	"name": "whazzapp",
 	"productName": "WhazzApp",
-	"version": "0.9.3",
+	"version": "0.9.4",
 	"description": "An ElectronJS/Svelte based WhatsApp Desktop alternative, with extra functionality",
 	"repository": {
 		"type": "git",
@@ -26,10 +26,11 @@
 	"dependencies": {
 		"@electron/remote": "^2.0.8",
 		"electron-context-menu": "^3.1.2",
+		"electron-log": "^4.4.7",
 		"electron-serve": "^1.1.0",
 		"electron-shortcuts": "^0.4.0",
 		"electron-store": "^8.0.1",
-		"electron-updater": "^5.0.1",
+		"electron-updater": "^4.6.5",
 		"electron-window-state": "^5.0.3",
 		"randomstring": "^1.2.2"
 	},

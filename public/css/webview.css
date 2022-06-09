@@ -24,4 +24,5 @@ body, #app, .web {
 	top: 0 !important;
 	height: 100% !important;
 	width: 100% !important;
+	max-width: 100% !important;
 }
