@@ -1,3 +1,6 @@
+# This project is not being maintained anymore. Feel free to download the latest release and try it out.
+# The status of this repo will be updated if I get the chance to work on the project again.
+
 <div align="center">
     <h1>Introducing WhazzApp</h1>
     <br>
