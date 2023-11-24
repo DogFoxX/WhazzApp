@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Color vars */
+/* Dark */
+[data-theme="dark"] {
+    /* Titlbar */
+    --title-bg: #111B21;
+    --title-font: #F0F2F5;
+    --title-input-bg: #202C33;
+    --title-input-font: #F0F2F5;
+    --title-button-hover-bg: #202C33;
+    /* Menu */
+    --menu-bg: #233138;
+    --menu-font: #F0F2F5;
+    --menu-button-hover: #182229;
+    /* Background Colors */
+    --primary-bg: hsl(203, 32%, 10%);
+    --secondary-bg: hsl(167, 100%, 33%);
+    /* Font Colors */
+    --primary-font: hsl(220, 13%, 95%);
+    --secondary-font: hsl(220, 13%, 95%);
+    /* Button Colors */
+    --primary-btn-hover-bg: hsl(202, 23%, 16%);
+    /* Input Colors */
+    --primary-input-bg: hsl(202, 23%, 16%);
+    --primary-input-font: hsl(220, 13%, 95%);
+}
+
+/* Light */
+:root {
+    /* Titlebar */
+    --title-bg: #00A884;
+    --title-font: #F0F2F5;
+    --title-input-bg: #FFF;
+    --title-input-font: #3B4A54;
+    --title-button-hover-bg: #009777;
+    /* Menu */
+    --menu-bg: #FFF;
+    --menu-font: #3B4A54;
+    --menu-button-hover: #F0F2F5;
+    /* Background Colors */
+    --primary-bg: hsl(167, 100%, 33%);
+    --secondary-bg: hsl(167, 100%, 33%);
+    /* Font Colors */
+    --primary-font: hsl(220, 13%, 95%);
+    --secondary-font: hsl(220, 13%, 95%);
+    /* Button Colors */
+    --primary-btn-hover-bg: hsl(202, 23%, 16%);
+    /* Input Colors */
+    --primary-input-bg: hsl(220, 13%, 95%);
+    --primary-input-font: #3b4a54;
+}
+
+/* Global CSS */
+body {
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, "Lucida Grande", Arial, Ubuntu, Cantarell, "Fira Sans", sans-serif;
+}
+input {
+    outline: none;
+    background-color: transparent;
+}
+
+button {
+    outline: none;
+}
+
+button.icon-btn.secondary {
+    color: hsl(167, 100%, 33%);
+}
+
+button.icon-btn.secondary:disabled {
+    color: #ccc;
+}
+
+input::placeholder {
+    color: #ccc
+}

@@ -1,0 +1,30 @@
+[class="web"] {
+	--background-color: #F0F2F5;
+	--landing-background-color: #008266
+}
+
+[class="web dark"] {
+	--background-color: #111B21;
+	--landing-background-color: #202C33
+}
+
+body, #app, .web {
+	background-color: var(--background-color) !important;
+}
+
+.app-wrapper-web > div {
+    top: 0 !important;
+	height: 100% !important;
+	width: 100% !important;
+	max-width: 100% !important;
+}
+
+.landing-wrapper::before {
+	background-color: var(--landing-background-color) !important;
+}
+
+.app-wrapper-web > span:nth-child(3) > div > span > div > div {
+	height: 100% !important;
+	width: 100% !important;
+	top: 0 !important;
+}

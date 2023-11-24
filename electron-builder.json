@@ -1,0 +1,26 @@
+{
+	"appId": "whazzapp",
+	"icon": "./resources/icon.ico",
+	"nsis": {
+		"artifactName": "${name}-setup.${ext}",
+    	"createStartMenuShortcut": "true",
+    	"deleteAppDataOnUninstall": "true",
+    	"uninstallDisplayName": "${productName}"
+	},
+	"directories": {
+		"output": ".build"
+	},
+    "files": [
+		".electron/*",
+		{
+			"from": ".svelte",
+			"to": ""
+		}
+	],
+	"extraFiles": [
+		"resources/*"
+	],
+	"publish": {
+		"provider": "github"
+	}
+}
