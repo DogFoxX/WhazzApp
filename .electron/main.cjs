@@ -1,4 +1,4 @@
-const { BrowserWindow, app, ipcMain, nativeTheme, Notification } = require('electron');
+const { BrowserWindow, app, ipcMain, nativeTheme, Notification, shell } = require('electron');
 const { initRenderer } = require('electron-store');
 const serve = require('electron-serve');
 const loadURL = serve({ directory: "." });
@@ -110,7 +110,6 @@ contextMenu({
 
 app.on('ready', () => {
     createWindow();
-	mainWindow.webContents.openDevTools({ mode: 'detach' })
 
 	// Insert Webview Preload
 	mainWindow.webContents.on('will-attach-webview', (e, webPreferences) => {
@@ -161,6 +160,12 @@ app.on('web-contents-created', (e, contents) => {
 		contents.on('dom-ready', () => {
 			contents.insertCSS(insertCSS);
 		});
+
+		// Open URLs in default browser
+		contents.setWindowOpenHandler((details) => {
+			shell.openExternal(details.url);
+			return { action: 'deny' }
+		  })
 
 		// Load number
 		ipcMain.handle('load-number', (e, data) => {
