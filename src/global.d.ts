@@ -17,6 +17,14 @@ declare const accounts: {
     create(options: {name: string, users: [options: {name: string}]}): void
 }
 
+declare const settings: {
+    /**Get settings */
+    get: {
+        /**Get country code from settings */
+        code(): async;
+    }
+}
+
 declare const theme: {
     //**Sets the desired theme mode */
     set(mode: 'dark' | 'light' | 'system'): void

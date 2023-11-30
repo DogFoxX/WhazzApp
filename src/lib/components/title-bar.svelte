@@ -1,6 +1,9 @@
 <script>
+    // Svelte Imports
+    import { onMount } from 'svelte';
+
     // Import Menu component
-    import TitleMenu from "$lib/components/title-menu.svelte";
+    import TitleMenu from '$lib/components/title-menu.svelte';
 
     // Import menu open (boolean) store
     import { menu } from '$lib/stores';
@@ -43,33 +46,28 @@
     // Format options:  +27 xx xxx xxxx
     //                  0xx xxx xxxx
     //                  xx xxx xxxx
-    let numFormat = /^(\+27[-\s\.])?[0]?[0-9]{2} [0-9]{3} [0-9]{4}$/;
+    $: ({ format, regex } = settings.get.code());
 
-    // Send number main process
-    const send = () => {
-        // Test value against Regex pattern before sending
-        if (numFormat.test(value)) num.send(value);
-    }
+    let numFormat;
+
+    onMount(() => {
+        const stringified = JSON.stringify(format);
+        numFormat = new RegExp(JSON.parse(stringified).slice(1, -1));
+    });
 
     // Input keyup handler
     const hanldeKeydown = (e) => {
-        // Array of valid regex that match inputFormat at each stage
-        const regex = [
-            /^(\+[0-9]{2})$/,
-            /^(\+[0-9]{2}) [0-9]{2}$/,
-            /^(\+[0-9]{2}) [0-9]{2} [0-9]{3}$/,
-            /^[1-9]{2}$/,
-            /^[1-9]{2} [0-9]{3}$/,
-            /^0[0-9]{2}$/,
-            /^0[0-9]{2} [0-9]{3}$/
-        ];
 
         // Do nothing when Enter is pressed
         // Form handels the submit
-        if (e.key == 'Enter') return;
+        if (e.code == 'Enter') return;
+
+        if (e.ctrlKey) {
+            if (e.code == 'KeyA') return;
+        }
 
         // Prevent spacebar input
-        if (e.keyCode == '32') e.preventDefault();
+        if (e.code == 'Space') e.preventDefault();
 
         // Prevent further code from running when backspace is pressed
         if (e.key == 'Backspace') return;
@@ -81,8 +79,10 @@
         if (numFormat.test(value)) e.preventDefault();
 
         // Check and update the formatting using the same logic as keyup
-        regex.forEach(rex => {
-            if (rex.test(value)) value += ' ';
+        regex.forEach(rexp => {
+            const stringified = JSON.stringify(rexp);
+            const reg = new RegExp(JSON.parse(stringified).slice(1, -1));
+            if (reg.test(value)) value += ' ';
         });
     }
 
@@ -123,13 +123,13 @@
                     </TitleMenu>
                 {/if}
             </div>
-            <form on:submit|preventDefault={send}>
+            <form on:submit|preventDefault={() => num.send(value)}>
                 <input
                     bind:value type="text"
                     on:keydown={hanldeKeydown}
                     maxlength="15" placeholder="Enter number"
                 >
-                <button class="px-2 fa-regular fa-arrow-right icon-btn secondary" disabled={!numFormat.test(value)}/>
+                <button class="px-2 fa-regular fa-arrow-right icon-btn secondary" disabled={numFormat && !numFormat.test(value)}/>
             </form>
         </span>
     </div>

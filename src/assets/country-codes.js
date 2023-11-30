@@ -1002,7 +1002,8 @@ export const countries = [
 	{
 		title: "South Africa",
 		icon: "flag-icon flag-icon-za",
-		code: "+27"
+		code: "+27",
+		format: "/^(\+27[-\s\.])?[0]?[0-9]{2} [0-9]{3} [0-9]{4}$/"
 	},
 	{
 		title: "South Korea",

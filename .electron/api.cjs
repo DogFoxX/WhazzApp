@@ -21,7 +21,17 @@ const settStore = new Store({
         'country-code': {
             name: 'South Africa',
             code: '+27',
-            flag: 'flag-icon-za'
+            flag: 'flag-icon-za',
+            format: "/^(\\+27[-\\s\\.])?[0]?[0-9]{2} [0-9]{3} [0-9]{4}$/",
+		    regex: [
+                "/^(\\+[0-9]{2})$/",
+                "/^(\\+[0-9]{2}) [0-9]{2}$/",
+                "/^(\\+[0-9]{2}) [0-9]{2} [0-9]{3}$/",
+                "/^[1-9]{2}$/",
+                "/^[1-9]{2} [0-9]{3}$/",
+                "/^0[0-9]{2}$/",
+                "/^0[0-9]{2} [0-9]{3}$/"
+            ]
         }
     }
 });
@@ -78,5 +88,13 @@ window.accounts = {
                 users
             }
         ]);
+    }
+}
+
+window.settings = {
+    get: {
+        code: () => {
+            return settStore.get('country-code');
+        }
     }
 }

@@ -7,7 +7,6 @@ const contextMenu = require("electron-context-menu");
 const { readFileSync } = require('fs');
 const insertCSS = readFileSync(`${__dirname}/webview.css`, 'utf-8');
 const { autoUpdater } = require('electron-updater');
-const { setInterval } = require('timers');
 
 // Set Modal ID
 app.setAppUserModelId(app.name);
@@ -62,7 +61,7 @@ const createWindow = () => {
 	// Delete this entire block of code when you are ready to package the application.
 	if (isDev()) {
 		// Open the DevTools
-		mainWindow.webContents.openDevTools({ mode: 'detach' })
+		mainWindow.openDevTools({ mode: 'detach' })
 
 		// Configure AutoUpdater for Development testing
 		autoUpdater.autoDownload = false
@@ -87,7 +86,7 @@ const createWindow = () => {
 	// })
 
 	// Emitted when the window is closed.
-	mainWindow.on('closed', function () {
+	mainWindow.on('closed', () => {
 		// Dereference the window object, usually you would store windows
 		// in an array if your app supports multi windows, this is the time
 		// when you should delete the corresponding element.
